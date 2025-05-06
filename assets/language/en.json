@@ -1,0 +1,11 @@
+{
+  "app_name": "Test theme and language",
+  "getStarted": "Get Started",
+  "signInText": "Sign In",
+  "signUpText": "Sign Up",
+  "enterEmailText": "Email",
+  "enterPasswordText": "Password",
+  "doNotHaveAccount": "Don’t Have An Account ?",
+  "alreadyHaveAccount": "Already have an account?",
+  "createNewAccount": "Create New Account"
+}
