@@ -25,17 +25,17 @@ class EditInsightsController extends GetxController {
     'Happy', 'Crying', 'Indifferent','Sad','Angry',
     'Questioning','In pain','Cramping','Content','Embarrassed'];
 
-  final Map<String, Image> moodIcons = {
-    'Happy': Image.asset(AppImages.cuteappLogo),
-    'Crying': Image.asset('assets/images/cryingImage.png'),
-    'Indifferent': Image.asset('assets/images/indifferentImage.png'),
-    'Sad': Image.asset('assets/images/sadImage.png'),
-    'Angry': Image.asset('assets/images/angryImage.png'),
-    'Questioning': Image.asset('assets/images/questioningImage.png'),
-    'In pain': Image.asset('assets/images/inPainImage.png'),
-    'Cramping': Image.asset('assets/images/crampingImage.png'),
-    'Content': Image.asset('assets/images/contentImage.png'),
-    'Embarrassed': Image.asset('assets/images/embarrassedImage.png'),
+  final Map<String, String> moodIcons = {
+    'Happy':AppImages.happyImage,
+    'Crying': AppImages.cryImage,
+    'Indifferent': AppImages.indifferent,
+    'Sad': AppImages.sadImage,
+    'Angry': AppImages.angry,
+    'Questioning':AppImages.questioning,
+    'In pain': AppImages.inPain,
+    'Cramping':AppImages.cramping,
+    'Content': AppImages.content,
+    'Embarrassed': AppImages.embarrassed,
   };
 
 
@@ -44,8 +44,8 @@ class EditInsightsController extends GetxController {
   final List<String> activityOption = ['Intercourse', 'Insemination'];
   // Map Activity to icons
   final Map<String, String> activityIcons = {
-    'Intercourse': AppImages.cuteappLogo,
-    'Insemination':  AppImages.appLogo,
+    'Intercourse': AppImages.love,
+    'Insemination':  AppImages.insemination,
   };
 
 
@@ -61,13 +61,13 @@ class EditInsightsController extends GetxController {
   ];
 
   // Map symptoms to icons
-  final Map<String, IconData> symptomIcons = {
-    'Headache': Icons.face_retouching_natural,
-    'Cramps': Icons.sick,
-    'Backache': Icons.accessibility_new,
-    'Breast tenderness': Icons.favorite_border,
-    'Cervical mucous': Icons.opacity,
-    'Others': Icons.more_horiz,
+  final Map<String, String> symptomIcons = {
+    'Headache': AppImages.headache,
+    'Cramps': AppImages.cramps,
+    'Backache': AppImages.backache,
+    'Breast tenderness': AppImages.breast,
+    'Cervical mucous': AppImages.cervical,
+    'Others': AppImages.others,
   };
 
 }
