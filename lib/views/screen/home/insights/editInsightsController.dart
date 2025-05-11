@@ -1,4 +1,5 @@
 import 'package:fertie_application/utils/app_icons.dart';
+import 'package:fertie_application/utils/app_images.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,9 +14,9 @@ class EditInsightsController extends GetxController {
   // Map Menstrual to icons
   final Map<String, Widget> menstrualIcons = {
     'Light': SvgPicture.asset(AppIcons.bloodIcon),
-    'Medium': SvgPicture.asset(AppIcons.calenderIcon),
-    'Heavy': SvgPicture.asset(AppIcons.helpIcon),
-    'Spotting': SvgPicture.asset(AppIcons.notificationIcon),
+    'Medium': SvgPicture.asset(AppIcons.mediumIcon),
+    'Heavy': SvgPicture.asset(AppIcons.heavyIcon),
+    'Spotting': SvgPicture.asset(AppIcons.spottingIcon),
   };
 
   //==================================>>> Mood
@@ -23,17 +24,18 @@ class EditInsightsController extends GetxController {
   final List<String> moodOption = [
     'Happy', 'Crying', 'Indifferent','Sad','Angry',
     'Questioning','In pain','Cramping','Content','Embarrassed'];
-  final Map<String, IconData> moodIcons = {
-    'Happy': Icons.face_retouching_natural,
-    'Crying': Icons.sick,
-    'Indifferent': Icons.sick,
-    'Sad': Icons.safety_check_outlined,
-    'Angry': Icons.sick,
-    'Questioning': Icons.qr_code,
-    'In pain': Icons.padding,
-    'Cramping': Icons.satellite,
-    'Content': Icons.sick,
-    'Embarrassed': Icons.emoji_emotions,
+
+  final Map<String, Image> moodIcons = {
+    'Happy': Image.asset(AppImages.cuteappLogo),
+    'Crying': Image.asset('assets/images/cryingImage.png'),
+    'Indifferent': Image.asset('assets/images/indifferentImage.png'),
+    'Sad': Image.asset('assets/images/sadImage.png'),
+    'Angry': Image.asset('assets/images/angryImage.png'),
+    'Questioning': Image.asset('assets/images/questioningImage.png'),
+    'In pain': Image.asset('assets/images/inPainImage.png'),
+    'Cramping': Image.asset('assets/images/crampingImage.png'),
+    'Content': Image.asset('assets/images/contentImage.png'),
+    'Embarrassed': Image.asset('assets/images/embarrassedImage.png'),
   };
 
 
@@ -41,10 +43,11 @@ class EditInsightsController extends GetxController {
   RxString selectedActivity = ''.obs;
   final List<String> activityOption = ['Intercourse', 'Insemination'];
   // Map Activity to icons
-  final Map<String, IconData> activityIcons = {
-    'Intercourse': Icons.face_retouching_natural,
-    'Insemination': Icons.sick,
+  final Map<String, String> activityIcons = {
+    'Intercourse': AppImages.cuteappLogo,
+    'Insemination':  AppImages.appLogo,
   };
+
 
   // =================================================>>Symptoms
   RxString selectedSymptoms = ''.obs;

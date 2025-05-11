@@ -5,7 +5,7 @@ import 'package:fertie_application/utils/app_images.dart';
 import 'package:fertie_application/utils/style.dart';
 import 'package:fertie_application/views/base/custom_button.dart';
 import 'package:fertie_application/views/screen/bottomMenuBar/user_bottom_menu..dart';
-import 'package:fertie_application/views/screen/home/facticity_score_card.dart';
+import 'package:fertie_application/views/screen/home/insights/facticity_score_card.dart';
 import 'package:fertie_application/views/screen/home/home_screen_graph.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

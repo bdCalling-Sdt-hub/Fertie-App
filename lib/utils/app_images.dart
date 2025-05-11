@@ -5,5 +5,6 @@ class AppImages{
 
   static String appLogo = "$baseUrl/appLogo.png";
   static String cuteappLogo = "$baseUrl/cuteappLogo.png";
+  static String happyImage = "$baseUrl/happyImage.png";
 
 }

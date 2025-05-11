@@ -1,7 +1,7 @@
 import 'package:fertie_application/utils/app_colors.dart';
 import 'package:fertie_application/utils/style.dart';
 import 'package:fertie_application/views/base/custom_text_field.dart';
-import 'package:fertie_application/views/screen/home/editInsightsController.dart';
+import 'package:fertie_application/views/screen/home/insights/editInsightsController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -129,7 +129,7 @@ class _EditInsightsScreenState extends State<EditInsightsScreen> {
                         return Column(
                           children: [
                             Wrap(
-                              spacing: 8.w,
+                              spacing: 8.w, // Adjust spacing between the chips
                               children: editInsightsController.moodOption.map((option) {
                                 bool isSelected = selectedFuel == option;
                                 return ChoiceChip(
@@ -137,15 +137,15 @@ class _EditInsightsScreenState extends State<EditInsightsScreen> {
                                   label: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Icon(
-                                        editInsightsController.moodIcons[option],
-                                        size: 18.sp,
-                                        color: isSelected ? AppColors.white : AppColors.blackColor,
-                                      ),
+
                                       SizedBox(width: 4.w),
+                                      // Text part
                                       Text(
-                                      option,
-                                      style: AppStyles.fontSize16(fontWeight: FontWeight.w700,color: AppColors.blackColor)
+                                        option,
+                                        style: AppStyles.fontSize16(
+                                          fontWeight: FontWeight.w700,
+                                          color: AppColors.blackColor,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -190,12 +190,13 @@ class _EditInsightsScreenState extends State<EditInsightsScreen> {
                                   label: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Icon(
-                                        editInsightsController.activityIcons[option],
-                                        size: 18.sp,
-                                        color: isSelected ? AppColors.white : AppColors.blackColor,
-                                      ),
-                                      SizedBox(width: 4.w),
+                                  Image.asset(
+                                  editInsightsController.activityIcons[option]!,
+                                    width: 18.sp,
+                                    height: 18.sp,
+                                    color: isSelected ? AppColors.white : AppColors.blackColor,
+                                  ),
+                                    SizedBox(width: 4.w),
                                       Text(
                                           option,
                                           style: AppStyles.fontSize16(fontWeight: FontWeight.w700,color: AppColors.blackColor)

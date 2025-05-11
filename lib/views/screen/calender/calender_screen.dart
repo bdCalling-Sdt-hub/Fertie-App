@@ -171,50 +171,48 @@ class _CalenderScreenState extends State<CalenderScreen> {
                     padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                     child: Divider(thickness: .5, color: AppColors.color7D9EBB),
                   ),
-                  Container(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.all(8.r),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                DayStatusWidget(
-                                  color: AppColors.colorF7D6D1,
-                                  title: 'Today',
-                                ),
-                                SizedBox(height: 8.h),
-                                DayStatusWidget(
-                                  color: AppColors.colorDFC7FF,
-                                  title: 'Fertile Day',
-                                ),
-                              ],
-                            ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.r),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              DayStatusWidget(
+                                color: AppColors.colorF7D6D1,
+                                title: 'Today',
+                              ),
+                              SizedBox(height: 8.h),
+                              DayStatusWidget(
+                                color: AppColors.colorDFC7FF,
+                                title: 'Fertile Day',
+                              ),
+                            ],
                           ),
                         ),
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.all(8.r),
-                            child: Column(
-                              children: [
-                                DayStatusWidget(
-                                    color: AppColors.colorFF5653,
-                                    title: 'Menstruation'
-                                ),
-                                SizedBox(height: 8.h),
-                                DayStatusWidget(
-                                    color: AppColors.color7D9EBB,
-                                    title: 'Ovulation'
-                                ),
-                              ],
-                            ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.r),
+                          child: Column(
+                            children: [
+                              DayStatusWidget(
+                                  color: AppColors.colorFF5653,
+                                  title: 'Menstruation'
+                              ),
+                              SizedBox(height: 8.h),
+                              DayStatusWidget(
+                                  color: AppColors.color7D9EBB,
+                                  title: 'Ovulation'
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ],
               ),
