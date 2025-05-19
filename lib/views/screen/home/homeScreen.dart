@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.secondColor,
+      backgroundColor: AppColors.colorFDFBEF,
       bottomNavigationBar: UserBottomMenu(0),
 
       body: SingleChildScrollView(
@@ -204,44 +204,59 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       CustomButton(onTap: (){}, text: 'View Full Insights'),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: CardView(
-                              icon: 'assets/images/angry.png',
-                              title: 'Implantation Window',
-                              date: 'Sunday, May 18, 2025, 03:31 PM +06',
-                              description: 'If fertilization occurred recently, implantation may be underway.',
-                            ),
-                          ),
-                          Expanded(
-                            child: CardView(
-                              icon: 'assets/images/angry.png',
-                              title: 'Implantation Window',
-                              date: 'Sunday, May 18, 2025, 03:31 PM +06',
-                              description: 'If fertilization occurred recently, implantation may be underway.',
-                            ),
-                          ),
-                        ],
-                      )
+
                     ],
                   ),
                 ),
 
               ),
+              Row(
+                children: [
+                  Expanded(
+                    child: CardView(
+                      icon: 'assets/images/angry.png',
+                      title: 'Implantation Window',
+                      date: 'May 14, 2025',
+                      description: 'In 6 days (CD14)',
+                    ),
+                  ),
+                  Expanded(
+                    child: CardView(
+                      icon: 'assets/images/angry.png',
+                      title: 'Implantation Window',
+                      date: 'May 14, 2025',
+                      description: 'Expected start of your next period based on your usual cycle',
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8.h),
+              Row(
+                children: [
+                  Expanded(
+                    child: CardView(
+                      icon: 'assets/images/angry.png',
+                      title: 'Implantation Window',
+                      date: 'May 14, 2025',
+                      description: 'In 6 days (CD14)',
+                    ),
+                  ),
+                  Expanded(
+                    child: CardView(
+                      icon: 'assets/images/angry.png',
+                      title: 'Implantation Window',
+                      date: 'May 14, 2025',
+                      description: 'Expected start of your next period based on your usual cycle',
+                    ),
+                  ),
+                ],
+              )
 
             ],
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _showPopup(context);
-        },
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        child: Image.asset(AppImages.cuteappLogo),
-      ),
+
     );
   }
 

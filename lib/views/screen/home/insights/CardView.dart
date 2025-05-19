@@ -1,5 +1,8 @@
 // container_view.dart
+import 'package:fertie_application/utils/app_colors.dart';
+import 'package:fertie_application/utils/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CardView extends StatelessWidget {
   final String icon;
@@ -18,50 +21,45 @@ class CardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-
+      height: 216.h,
+      width: 188.w,
       child: Card(
         elevation: 4,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        color: Colors.grey[100],
-        margin: const EdgeInsets.all(10),
+
+        color: AppColors.colorFEFDFB,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12),
+          side: BorderSide(
+            color: AppColors.greyColor,
+            width: 1.5,
+          ),
+        ),
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 12.w),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(
                 icon,
-                width: 40,
-                height: 40,
+                width: 40.w,
+                height: 40.h,
               ),
-              const SizedBox(height: 10),
+
               Text(
                 title,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
-                textAlign: TextAlign.center,
+                style: AppStyles.fontSize20(fontWeight: FontWeight.w600),
               ),
-              const SizedBox(height: 5),
-              Text(
-                date,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey,
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 2.h),
+                child: Text(
+                  date,
+                  style: AppStyles.fontSize14(fontWeight: FontWeight.w600),
                 ),
-                textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 10),
+              Divider(thickness: 1,color: AppColors.greyColor),
               Text(
                 description,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.black54,
-                ),
-                textAlign: TextAlign.center,
+                style: AppStyles.fontSize12(fontWeight: FontWeight.w600,color: AppColors.greyColor),
               ),
             ],
           ),
