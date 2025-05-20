@@ -1,7 +1,7 @@
 import 'package:fertie_application/utils/app_colors.dart';
 import 'package:fertie_application/utils/style.dart';
 import 'package:fertie_application/views/base/custom_text_field.dart';
-import 'package:fertie_application/views/screen/home/editInsightsController.dart';
+import 'package:fertie_application/views/screen/home/insights/editInsightsController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -80,6 +80,13 @@ class _EditInsightsScreenState extends State<EditInsightsScreen> {
                                 bool isSelected = selectedFuel == option;
                                 return ChoiceChip(
                                   showCheckmark: false,
+                                  selectedColor: AppColors.primaryColor,
+                                  backgroundColor: AppColors.secondColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                  ),
+                                  side: BorderSide.none,
+                                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                                   label: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
@@ -104,13 +111,7 @@ class _EditInsightsScreenState extends State<EditInsightsScreen> {
                                       print('Selected Menstrual: $option');
                                     });
                                   },
-                                  selectedColor: AppColors.primaryColor,
-                                  backgroundColor: AppColors.secondColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                  ),
-                                  side: BorderSide.none,
-                                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+
                                 );
                               }).toList(),
                             ),
@@ -133,19 +134,31 @@ class _EditInsightsScreenState extends State<EditInsightsScreen> {
                               children: editInsightsController.moodOption.map((option) {
                                 bool isSelected = selectedFuel == option;
                                 return ChoiceChip(
+                                  selectedColor: AppColors.primaryColor,
+                                  backgroundColor: AppColors.secondColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4.r),
+                                  ),
+                                  side: BorderSide.none,
+                                  padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
+
                                   showCheckmark: false,
                                   label: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Icon(
-                                        editInsightsController.moodIcons[option],
-                                        size: 18.sp,
-                                        color: isSelected ? AppColors.white : AppColors.blackColor,
+                                      Image.asset(
+                                        editInsightsController.moodIcons[option]!,
+                                        width: 18.w,
+                                        height: 18.h,
                                       ),
                                       SizedBox(width: 4.w),
+                                      // Text part
                                       Text(
-                                      option,
-                                      style: AppStyles.fontSize16(fontWeight: FontWeight.w700,color: AppColors.blackColor)
+                                        option,
+                                        style: AppStyles.fontSize16(
+                                          fontWeight: FontWeight.w700,
+                                          color: AppColors.blackColor,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -160,13 +173,6 @@ class _EditInsightsScreenState extends State<EditInsightsScreen> {
                                       print('Selected Mood: $option');
                                     });
                                   },
-                                  selectedColor: AppColors.primaryColor,
-                                  backgroundColor: AppColors.secondColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                  ),
-                                  side: BorderSide.none,
-                                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                                 );
                               }).toList(),
                             ),
@@ -186,16 +192,23 @@ class _EditInsightsScreenState extends State<EditInsightsScreen> {
                               children: editInsightsController.activityOption.map((option) {
                                 bool isSelected = selectedFuel == option;
                                 return ChoiceChip(
+                                  selectedColor: AppColors.primaryColor,
+                                  backgroundColor: AppColors.secondColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4.r),
+                                  ),
+                                  side: BorderSide.none,
+                                  padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
                                   showCheckmark: false,
                                   label: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Icon(
-                                        editInsightsController.activityIcons[option],
-                                        size: 18.sp,
-                                        color: isSelected ? AppColors.white : AppColors.blackColor,
-                                      ),
-                                      SizedBox(width: 4.w),
+                                  Image.asset(
+                                  editInsightsController.activityIcons[option]!,
+                                    width: 18.sp,
+                                    height: 18.sp,
+                                  ),
+                                    SizedBox(width: 4.w),
                                       Text(
                                           option,
                                           style: AppStyles.fontSize16(fontWeight: FontWeight.w700,color: AppColors.blackColor)
@@ -213,13 +226,6 @@ class _EditInsightsScreenState extends State<EditInsightsScreen> {
                                       print('Selected Activity: $option');
                                     });
                                   },
-                                  selectedColor: AppColors.primaryColor,
-                                  backgroundColor: AppColors.secondColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                  ),
-                                  side: BorderSide.none,
-                                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                                 );
                               }).toList(),
                             ),
@@ -239,14 +245,21 @@ class _EditInsightsScreenState extends State<EditInsightsScreen> {
                               children: editInsightsController.symptomsOption.map((option) {
                                 bool isSelected = selectedFuel == option;
                                 return ChoiceChip(
+                                  selectedColor: AppColors.primaryColor,
+                                  backgroundColor: AppColors.secondColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4.r),
+                                  ),
+                                  side: BorderSide.none,
+                                  padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
                                   showCheckmark: false,
                                   label: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Icon(
-                                        editInsightsController.symptomIcons[option],
-                                        size: 18.sp,
-                                        color: isSelected ? AppColors.white : AppColors.blackColor,
+                                      Image.asset(
+                                        editInsightsController.symptomIcons[option]!,
+                                        width: 18.sp,
+                                        height: 18.sp,
                                       ),
                                       SizedBox(width: 4.w),
                                       Text(
@@ -266,13 +279,6 @@ class _EditInsightsScreenState extends State<EditInsightsScreen> {
                                       print('Selected Symptoms: $option');
                                     });
                                   },
-                                  selectedColor: AppColors.primaryColor,
-                                  backgroundColor: AppColors.secondColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                  ),
-                                  side: BorderSide.none,
-                                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                                 );
                               }).toList(),
                             ),

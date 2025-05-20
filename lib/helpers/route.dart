@@ -9,7 +9,7 @@ import 'package:fertie_application/views/screen/auth/signInScreen.dart';
 import 'package:fertie_application/views/screen/auth/signUpScreen.dart';
 import 'package:fertie_application/views/screen/calender/calender_screen.dart';
 import 'package:fertie_application/views/screen/calender/cycleInsights_edit_screen.dart';
-import 'package:fertie_application/views/screen/home/editInsights_screen.dart';
+import 'package:fertie_application/views/screen/home/insights/editInsights_screen.dart';
 import 'package:fertie_application/views/screen/home/homeScreen.dart';
 import 'package:fertie_application/views/screen/notification/notificationScreen.dart';
 import 'package:fertie_application/views/screen/personalize/menstrualCycleScreen.dart';

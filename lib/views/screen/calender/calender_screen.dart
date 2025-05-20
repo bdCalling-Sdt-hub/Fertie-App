@@ -84,137 +84,144 @@ class _CalenderScreenState extends State<CalenderScreen> {
                       ),
                     ),
                   ),
-                  TableCalendar(
-                    firstDay: DateTime.utc(2024, 10, 20),
-                    lastDay: DateTime.utc(2030, 10, 20),
-                    focusedDay: _focusedDay,
-                    calendarFormat: _calendarFormat,
-                    selectedDayPredicate: (day) {
-                      return isSameDay(_selectedDay, day);
-                    },
-                    onDaySelected: (selectedDay, focusedDay) {
-                      setState(() {
-                        _selectedDay = selectedDay;
-                        _focusedDay = focusedDay;
-                      });
-                    },
-                    onFormatChanged: (format) {
-                      setState(() {
-                        _calendarFormat = format;
-                      });
-                    },
-                    onPageChanged: (focusedDay) {
-                      _focusedDay = focusedDay;
-                    },
-                    calendarStyle: CalendarStyle(
-                      selectedDecoration: BoxDecoration(
-                          color: AppColors.colorF7D6D1,
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(5.r),
-                          border: Border.all(color: AppColors.blackColor)),
-                      selectedTextStyle: TextStyle(color: AppColors.blackColor),
-                      todayDecoration: BoxDecoration(
-                        color: AppColors.colorF7D6D1,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(5.r),
+                  Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.h),
+                        border: Border.all(color: AppColors.primaryColor)
                       ),
-                      defaultDecoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(5.r),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TableCalendar(
+                        firstDay: DateTime.utc(2024, 10, 20),
+                        lastDay: DateTime.utc(2030, 10, 20),
+                        focusedDay: _focusedDay,
+                        calendarFormat: _calendarFormat,
+                        selectedDayPredicate: (day) {
+                          return isSameDay(_selectedDay, day);
+                        },
+                        onDaySelected: (selectedDay, focusedDay) {
+                          setState(() {
+                            _selectedDay = selectedDay;
+                            _focusedDay = focusedDay;
+                          });
+                        },
+                        onFormatChanged: (format) {
+                          setState(() {
+                            _calendarFormat = format;
+                          });
+                        },
+                        onPageChanged: (focusedDay) {
+                          _focusedDay = focusedDay;
+                        },
+                        calendarStyle: CalendarStyle(
+                          selectedDecoration: BoxDecoration(
+                              color: AppColors.colorF7D6D1,
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.circular(5.r),
+                              border: Border.all(color: AppColors.blackColor)),
+                          selectedTextStyle: TextStyle(color: AppColors.blackColor),
+                          todayDecoration: BoxDecoration(
+                            color: AppColors.colorF7D6D1,
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(5.r),
+                          ),
+                          defaultDecoration: BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(5.r),
+                          ),
+                          weekendDecoration: BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(5.r),
+                          ),
+                        ),
+                        headerStyle: HeaderStyle(
+                          titleCentered: true,
+                          formatButtonVisible: false,
+                          titleTextFormatter:
+                              (date, locale) => DateFormat.yMMMM(locale).format(date),
+                        ),
+                        calendarBuilders: CalendarBuilders(
+                          markerBuilder: (context, day, events) {
+                            List<String> dayEvents = _getEventsForDay(day);
+                            if (dayEvents.isNotEmpty) {
+                              return Positioned(
+                                bottom: 7,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: dayEvents.map((event) {
+                                    return Container(
+                                      height: 4.h,
+                                      width: 40.w,
+                                      margin: EdgeInsets.symmetric(horizontal: 0.5.w),
+                                      decoration: BoxDecoration(
+                                        color: event == 'today' ? AppColors.primaryColor
+                                            : event == 'fertile' ? AppColors.colorDFC7FF
+                                            : event == 'ovulation' ? AppColors.color7D9EBB
+                                            : event == 'menstruation' ? AppColors.colorFF5653
+                                            : Colors.transparent,
+                                        shape: BoxShape.rectangle,
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(16.r),
+                                          bottomRight: Radius.circular(16.r),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              );
+                            }
+                            return null;
+                          },
+                        ),
                       ),
-                      weekendDecoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(5.r),
-                      ),
-                    ),
-                    headerStyle: HeaderStyle(
-                      titleCentered: true,
-                      formatButtonVisible: false,
-                      titleTextFormatter:
-                          (date, locale) => DateFormat.yMMMM(locale).format(date),
-                    ),
-                    calendarBuilders: CalendarBuilders(
-                      markerBuilder: (context, day, events) {
-                        List<String> dayEvents = _getEventsForDay(day);
-                        if (dayEvents.isNotEmpty) {
-                          return Positioned(
-                            bottom: 7,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: dayEvents.map((event) {
-                                return Container(
-                                  height: 4.h,
-                                  width: 40.w,
-                                  margin: EdgeInsets.symmetric(horizontal: 0.5.w),
-                                  decoration: BoxDecoration(
-                                    color: event == 'today' ? AppColors.primaryColor
-                                        : event == 'fertile' ? AppColors.colorDFC7FF
-                                        : event == 'ovulation' ? AppColors.color7D9EBB
-                                        : event == 'menstruation' ? AppColors.colorFF5653
-                                        : Colors.transparent,
-                                    shape: BoxShape.rectangle,
-                                    borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(16.r),
-                                      bottomRight: Radius.circular(16.r),
-                                    ),
-                                  ),
-                                );
-                              }).toList(),
-                            ),
-                          );
-                        }
-                        return null;
-                      },
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                     child: Divider(thickness: .5, color: AppColors.color7D9EBB),
                   ),
-                  Container(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.all(8.r),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                DayStatusWidget(
-                                  color: AppColors.colorF7D6D1,
-                                  title: 'Today',
-                                ),
-                                SizedBox(height: 8.h),
-                                DayStatusWidget(
-                                  color: AppColors.colorDFC7FF,
-                                  title: 'Fertile Day',
-                                ),
-                              ],
-                            ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.r),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              DayStatusWidget(
+                                color: AppColors.colorF7D6D1,
+                                title: 'Today',
+                              ),
+                              SizedBox(height: 8.h),
+                              DayStatusWidget(
+                                color: AppColors.colorDFC7FF,
+                                title: 'Fertile Day',
+                              ),
+                            ],
                           ),
                         ),
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.all(8.r),
-                            child: Column(
-                              children: [
-                                DayStatusWidget(
-                                    color: AppColors.colorFF5653,
-                                    title: 'Menstruation'
-                                ),
-                                SizedBox(height: 8.h),
-                                DayStatusWidget(
-                                    color: AppColors.color7D9EBB,
-                                    title: 'Ovulation'
-                                ),
-                              ],
-                            ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.r),
+                          child: Column(
+                            children: [
+                              DayStatusWidget(
+                                  color: AppColors.colorFF5653,
+                                  title: 'Menstruation'
+                              ),
+                              SizedBox(height: 8.h),
+                              DayStatusWidget(
+                                  color: AppColors.color7D9EBB,
+                                  title: 'Ovulation'
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ],
               ),

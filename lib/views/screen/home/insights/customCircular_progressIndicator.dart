@@ -6,7 +6,8 @@ class CustomCircularProgressIndicator extends StatelessWidget {
   final Color backgroundColor;
   final Color valueColor;
 
-  CustomCircularProgressIndicator({
+  const CustomCircularProgressIndicator({
+    super.key,
     required this.value,
     required this.strokeWidth,
     required this.backgroundColor,
@@ -16,7 +17,7 @@ class CustomCircularProgressIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      size: Size(120, 110), // Size of the circular indicator
+      size: Size(120, 110),
       painter: _CustomProgressPainter(
         value: value,
         strokeWidth: strokeWidth,
@@ -42,9 +43,22 @@ class _CustomProgressPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // Paint for the progress arc (this will be drawn first, so it will be at the bottom)
+    // Paint for the background circle (full circle) - distinct from progress color
+    final Paint backgroundPaint = Paint()
+      ..color = backgroundColor // Use the provided background color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth + 2; // Make background circle stroke width slightly larger if needed
+
+    // Draw the background circle (full circle)
+    canvas.drawCircle(
+      Offset(size.width / 2, size.height / 2),
+      size.width / 2 - strokeWidth / 2,
+      backgroundPaint,
+    );
+
+    // Paint for the progress arc (this will be drawn above the background)
     final Paint progressPaint = Paint()
-      ..color = valueColor
+      ..color = valueColor // Use the provided progress color
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth;
 
@@ -59,25 +73,13 @@ class _CustomProgressPainter extends CustomPainter {
 
     progressPaint.strokeCap = StrokeCap.round;
 
+    // Draw the progress arc (portion of the circle)
     canvas.drawArc(
       rect,
-      -3.14159265359 / 2,
-      sweepAngle,
+      -3.14159265359 / 2,  // Starting from the top (12 o'clock position)
+      sweepAngle,  // Angle of the progress
       false,
       progressPaint,
-    );
-
-
-    final Paint backgroundPaint = Paint()
-      ..color = backgroundColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2;
-
-    // Draw the background circle (full circle)
-    canvas.drawCircle(
-      Offset(size.width / 2, size.height / 2),
-      size.width / 2 - strokeWidth / 2,
-      backgroundPaint,
     );
   }
 
