@@ -1,4 +1,3 @@
-// container_view.dart
 import 'package:fertie_application/utils/app_colors.dart';
 import 'package:fertie_application/utils/style.dart';
 import 'package:flutter/material.dart';
@@ -24,13 +23,12 @@ class CardView extends StatelessWidget {
       height: 216.h,
       width: 188.w,
       child: Card(
-        elevation: 4,
-
+        elevation: 2,
         color: AppColors.colorFEFDFB,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12),
           side: BorderSide(
             color: AppColors.greyColor,
-            width: 1.5,
+            width: .2,
           ),
         ),
         child: Padding(

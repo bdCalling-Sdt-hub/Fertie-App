@@ -214,8 +214,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Expanded(
                     child: CardView(
-                      icon: 'assets/images/angry.png',
-                      title: 'Implantation Window',
+                      icon: 'assets/images/waterImage.png',
+                      title: 'Ovulation',
                       date: 'May 14, 2025',
                       description: 'In 6 days (CD14)',
                     ),
