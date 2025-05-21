@@ -62,7 +62,7 @@ class UserBottomMenu extends StatelessWidget {
               Get.offAndToNamed(AppRoutes.homeScreen);
               break;
             case 1:
-              Get.offAndToNamed(AppRoutes.calenderScreen);
+              Get.offAndToNamed(AppRoutes.cycleInsightsScreen);
               break;
             case 2:
               Get.offAndToNamed(AppRoutes.profileScreen);

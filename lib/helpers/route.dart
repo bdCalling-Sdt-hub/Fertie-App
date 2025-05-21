@@ -7,8 +7,8 @@ import 'package:fertie_application/views/screen/auth/resetPassword_screen.dart';
 import 'package:fertie_application/views/screen/auth/setPasswordScreen.dart';
 import 'package:fertie_application/views/screen/auth/signInScreen.dart';
 import 'package:fertie_application/views/screen/auth/signUpScreen.dart';
-import 'package:fertie_application/views/screen/calender/calender_screen.dart';
-import 'package:fertie_application/views/screen/calender/cycleInsights_edit_screen.dart';
+import 'package:fertie_application/views/screen/cycle_insights/cycleInsights_edit_screen.dart';
+import 'package:fertie_application/views/screen/cycle_insights/cycle_insights_screen.dart';
 import 'package:fertie_application/views/screen/home/insights/editInsights_screen.dart';
 import 'package:fertie_application/views/screen/home/homeScreen.dart';
 import 'package:fertie_application/views/screen/notification/notificationScreen.dart';
@@ -43,7 +43,7 @@ class AppRoutes{
   static String homeScreen = "/homeScreen";
   static String signInScreen = "/signInScreen";
 
-  static String calenderScreen = "/calenderScreen";
+
   static String profileScreen = "/profileScreen";
   static String notificationScreen = "/notificationScreen";
   static String setPasswordScreen = "/setPasswordScreen";
@@ -72,6 +72,7 @@ class AppRoutes{
   static String labDetailsScreen = "/labDetailsScreen";
   static String upgradeAccountScreen = "/upgrade_account_screen";
   static String editInsightsScreen = "/editInsightsScreen";
+  static String cycleInsightsScreen = "/cycleInsightsScreen";
 
 
 
@@ -97,9 +98,10 @@ class AppRoutes{
    GetPage(name:homeScreen, page: ()=> HomeScreen(),transition: Transition.noTransition),
    GetPage(name:editInsightsScreen, page: ()=> EditInsightsScreen(),transition: Transition.noTransition),
 
-   //Calender
-   GetPage(name:calenderScreen, page: ()=> CalenderScreen(),transition: Transition.noTransition),
+   //CycleInsight
+
    GetPage(name:editCycleInsightScreen, page: ()=> EditCycleInsightScreen(),transition: Transition.noTransition),
+   GetPage(name:cycleInsightsScreen, page: ()=> CycleInsightsScreen(),transition: Transition.noTransition),
 
    //Profile
    GetPage(name:profileScreen, page: ()=> ProfileScreen(),transition: Transition.noTransition),

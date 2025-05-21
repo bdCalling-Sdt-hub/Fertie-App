@@ -66,6 +66,7 @@ class AppColors{
   static Color color4B4B4B = const Color(0xFF4B4B4B);
   static Color colorReview = const Color(0xFFFFD33C);
   static Color color59a35f = const Color(0xFF59a35f);
+  static Color color777777 = const Color(0xFF777777);
 
 
 

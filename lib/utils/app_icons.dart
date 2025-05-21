@@ -11,7 +11,7 @@ class AppIcons{
   static String notificationFillup = "$baseUrl/notification_fillup.svg";
   static String notificationIcon = "$baseUrl/notification_icon.svg";
   static String calenderfillup = "$baseUrl/calenderfillup.svg";
-  static String calenderIcon = "$baseUrl/calender.svg";
+  static String calenderIcon = "$baseUrl/cycle_insights.svg";
   static String googleIcon = "$baseUrl/googleIcon.svg";
   static String appleIcon = "$baseUrl/appleIcon.svg";
   static String changedIcon = "$baseUrl/changedIcon.svg";
