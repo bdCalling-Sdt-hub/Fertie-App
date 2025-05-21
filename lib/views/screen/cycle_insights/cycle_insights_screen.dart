@@ -69,4 +69,17 @@ class _CycleInsightsScreenState extends State<CycleInsightsScreen> {
       ),
     );
   }
+  void _showPopup (BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Color(0xFFFFDC86),
+          title: Text('Unlock full cycle insights with a 👑 Premium subscription! ',
+              style: AppStyles.fontSize16(fontWeight: FontWeight.w600)),
+          content: Text('Tap to Upgrade and get personalized features. 🎉🎉'),
+        );
+      },
+    );
+  }
 }
