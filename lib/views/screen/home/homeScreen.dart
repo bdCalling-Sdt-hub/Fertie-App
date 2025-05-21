@@ -1,18 +1,12 @@
 import 'package:fertie_application/helpers/route.dart';
 import 'package:fertie_application/utils/app_colors.dart';
-import 'package:fertie_application/utils/app_icons.dart';
-import 'package:fertie_application/utils/app_images.dart';
 import 'package:fertie_application/utils/style.dart';
 import 'package:fertie_application/views/base/custom_button.dart';
 import 'package:fertie_application/views/screen/bottomMenuBar/user_bottom_menu..dart';
-import 'package:fertie_application/views/screen/calender/calender_screen.dart';
-import 'package:fertie_application/views/screen/calender/datStatusWidget.dart';
+import 'package:fertie_application/views/screen/home/dayStatusWidget.dart';
 import 'package:fertie_application/views/screen/home/insights/CardView.dart';
-import 'package:fertie_application/views/screen/home/insights/facticity_score_card.dart';
-import 'package:fertie_application/views/screen/home/home_screen_graph.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -72,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: 10.h),
               Container(
                 decoration: BoxDecoration(
+                  color: AppColors.white,
                     borderRadius: BorderRadius.circular(16.h),
                     border: Border.all(color: AppColors.primaryColor)
                 ),
@@ -203,47 +198,55 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ],
                       ),
-                      CustomButton(onTap: (){}, text: 'View Full Insights'),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 8.h),
+                        child: CustomButton(onTap: (){}, text: 'View Full Insights'),
+                      ),
 
                     ],
                   ),
                 ),
 
               ),
-              Row(
-                children: [
-                  Expanded(
-                    child: CardView(
-                      icon: 'assets/images/waterImage.png',
-                      title: 'Ovulation',
-                      date: 'May 14, 2025',
-                      description: 'In 6 days (CD14)',
+              Padding(
+                padding:  EdgeInsets.symmetric(vertical: 8.h),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: CardView(
+                        icon: 'assets/images/waterImage.png',
+                        title: 'Ovulation',
+                        date: 'May 14, 2025',
+                        description: 'In 6 days (CD14)',
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: CardView(
-                      icon: 'assets/images/angry.png',
-                      title: 'Implantation Window',
-                      date: 'May 14, 2025',
-                      description: 'Expected start of your next period based on your usual cycle',
+                    SizedBox(width: 8.w),
+                    Expanded(
+                      child: CardView(
+                        icon: 'assets/images/love.png',
+                        title: 'Fertile Window',
+                        date: 'May 14, 2025',
+                        description: 'Expected start of your next period based on your usual cycle',
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               SizedBox(height: 8.h),
               Row(
                 children: [
                   Expanded(
                     child: CardView(
-                      icon: 'assets/images/angry.png',
-                      title: 'Implantation Window',
+                      icon: 'assets/images/redblood.png',
+                      title: 'Period Starts',
                       date: 'May 14, 2025',
                       description: 'In 6 days (CD14)',
                     ),
                   ),
+                  SizedBox(width: 8.w),
                   Expanded(
                     child: CardView(
-                      icon: 'assets/images/angry.png',
+                      icon: 'assets/images/tree.png',
                       title: 'Implantation Window',
                       date: 'May 14, 2025',
                       description: 'Expected start of your next period based on your usual cycle',

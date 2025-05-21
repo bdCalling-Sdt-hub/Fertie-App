@@ -20,7 +20,7 @@ class CardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 216.h,
+      height: 220.h,
       width: 188.w,
       child: Card(
         elevation: 2,
@@ -37,10 +37,14 @@ class CardView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Image.asset(
-                icon,
-                width: 40.w,
-                height: 40.h,
+
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 4.h),
+                child: Image.asset(
+                  icon,
+                  width: 40.w,
+                  height: 40.h,
+                ),
               ),
 
               Text(
@@ -51,7 +55,7 @@ class CardView extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 2.h),
                 child: Text(
                   date,
-                  style: AppStyles.fontSize14(fontWeight: FontWeight.w600),
+                  style: AppStyles.fontSize14(fontWeight: FontWeight.w600,color: AppColors.greyColor),
                 ),
               ),
               Divider(thickness: 1,color: AppColors.greyColor),
