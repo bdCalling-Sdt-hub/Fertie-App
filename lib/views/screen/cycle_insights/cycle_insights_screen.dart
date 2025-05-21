@@ -30,7 +30,7 @@ class _CycleInsightsScreenState extends State<CycleInsightsScreen> {
       bottomNavigationBar: UserBottomMenu(1),
       appBar: AppBar(
         backgroundColor: AppColors.secondColor,
-        title: Text('Cycle Insights', style: AppStyles.fontSize24(fontWeight: FontWeight.w600)),
+        title: Text('Cycle Insights', style: AppStyles.fontSize16(fontWeight: FontWeight.w600)),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),

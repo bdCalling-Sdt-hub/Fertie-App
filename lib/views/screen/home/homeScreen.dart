@@ -263,7 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void _showPopup(BuildContext context) {
+  void _showPopup (BuildContext context) {
     showDialog(
       context: context,
       builder: (context) {

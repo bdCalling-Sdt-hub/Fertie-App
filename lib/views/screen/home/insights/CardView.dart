@@ -20,7 +20,7 @@ class CardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 220.h,
+      height: 230.h,
       width: 188.w,
       child: Card(
         elevation: 2,
@@ -28,7 +28,7 @@ class CardView extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12),
           side: BorderSide(
             color: AppColors.greyColor,
-            width: .2,
+            width: .2.w,
           ),
         ),
         child: Padding(
