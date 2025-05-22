@@ -1,6 +1,5 @@
 import 'package:fertie_application/helpers/route.dart';
 import 'package:fertie_application/utils/app_colors.dart';
-import 'package:fertie_application/utils/style.dart';
 import 'package:fertie_application/views/base/custom_button.dart';
 import 'package:fertie_application/views/screen/bottomMenuBar/user_bottom_menu..dart';
 import 'package:fertie_application/views/screen/home/dayStatusWidget.dart';
