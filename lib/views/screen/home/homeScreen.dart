@@ -7,7 +7,7 @@ import 'package:fertie_application/views/base/custom_button.dart';
 import 'package:fertie_application/views/screen/bottomMenuBar/user_bottom_menu..dart';
 import 'package:fertie_application/views/screen/home/dayStatusWidget.dart';
 import 'package:fertie_application/views/screen/home/inbox/homepage_chat_screen.dart';
-import 'package:fertie_application/views/screen/home/insights/CardView.dart';
+import 'package:fertie_application/views/screen/home/insights/cardView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';

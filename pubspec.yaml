@@ -53,6 +53,8 @@ dependencies:
   local_auth: ^2.3.0
   table_calendar: ^3.2.0
   fl_chart: ^0.71.0
+  mime: ^2.0.0
+  mime_type: ^1.0.1
 
 dev_dependencies:
   flutter_test:

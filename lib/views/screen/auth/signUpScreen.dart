@@ -66,7 +66,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
 
               SizedBox(height: 20.h),
-              Padding(
+           /*   Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 20.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -92,7 +92,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ],
                 ),
-              ),
+              ),*/
               /// Sing In Button
               CustomButton(
                 onTap: () {
