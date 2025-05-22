@@ -9,6 +9,7 @@ import 'package:fertie_application/views/screen/auth/signInScreen.dart';
 import 'package:fertie_application/views/screen/auth/signUpScreen.dart';
 import 'package:fertie_application/views/screen/cycle_insights/cycleInsights_edit_screen.dart';
 import 'package:fertie_application/views/screen/cycle_insights/cycle_insights_screen.dart';
+import 'package:fertie_application/views/screen/home/inbox/individual_chat_screen.dart';
 import 'package:fertie_application/views/screen/home/insights/editInsights_screen.dart';
 import 'package:fertie_application/views/screen/home/homeScreen.dart';
 import 'package:fertie_application/views/screen/notification/notificationScreen.dart';
@@ -73,6 +74,7 @@ class AppRoutes{
   static String upgradeAccountScreen = "/upgrade_account_screen";
   static String editInsightsScreen = "/editInsightsScreen";
   static String cycleInsightsScreen = "/cycleInsightsScreen";
+  static String individualChatIScreen = "/individualChatIScreen";
 
 
 
@@ -134,6 +136,7 @@ class AppRoutes{
 
    //Notification
    GetPage(name:notificationScreen, page: ()=> NotificationScreen(),transition: Transition.noTransition),
+   GetPage(name:individualChatIScreen, page: ()=> IndividualChatIScreen(),transition: Transition.noTransition),
 
 
   ];

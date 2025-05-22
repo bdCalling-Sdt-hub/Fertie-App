@@ -1,11 +1,16 @@
 import 'package:fertie_application/helpers/route.dart';
 import 'package:fertie_application/utils/app_colors.dart';
+import 'package:fertie_application/utils/app_icons.dart';
+import 'package:fertie_application/utils/app_images.dart';
+import 'package:fertie_application/utils/style.dart';
 import 'package:fertie_application/views/base/custom_button.dart';
 import 'package:fertie_application/views/screen/bottomMenuBar/user_bottom_menu..dart';
 import 'package:fertie_application/views/screen/home/dayStatusWidget.dart';
+import 'package:fertie_application/views/screen/home/inbox/homepage_chat_screen.dart';
 import 'package:fertie_application/views/screen/home/insights/CardView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -49,7 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: AppColors.colorFDFBEF,
       bottomNavigationBar: UserBottomMenu(0),
-
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(16.r),
@@ -57,10 +61,47 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 20.h),
+            Container(
+              height: 116.h,width: double.infinity,
+              child: Card(
+                elevation: 2,
+                color: AppColors.colorFDFBEF,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.h),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 12.w),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset(AppImages.cuteappLogo,height: 60,width: 60),
+                      SizedBox(width: 8.w),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                           'Hey "Lindsay" !',
+                            style: AppStyles.fontSize20(fontWeight: FontWeight.w600),
+                          ),
+                          Text('You\'re on Cycle Day 10- this is a \nkey time 🪴', style: AppStyles.fontSize14(fontWeight: FontWeight.w600,color: AppColors.greyColor),
+                          ),
+                        ],
+                      ),
+
+
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
               CustomButton(onTap: () {
                 Get.toNamed(AppRoutes.personalizeScreen);
               }, text: "Personalize Journey 🧡"
               ),
+
+              HomeChatWidget(),
 
               SizedBox(height: 10.h),
               Container(

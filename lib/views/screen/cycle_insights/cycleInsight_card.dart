@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CycleInsightsCard extends StatelessWidget {
-  final IconData icon;
+  final Widget svgIcon; // <-- Accept any widget here for icon
   final Color iconColor;
   final Color backgroundColor;
   final String? title;
@@ -14,7 +14,7 @@ class CycleInsightsCard extends StatelessWidget {
 
   const CycleInsightsCard({
     super.key,
-    required this.icon,
+    required this.svgIcon,
     required this.iconColor,
     this.title,
     required this.content,
@@ -45,7 +45,8 @@ class CycleInsightsCard extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 8.h),
-                child: Text(headerText,
+                child: Text(
+                  headerText,
                   style: AppStyles.fontSize14(
                     color: AppColors.blackColor,
                     fontWeight: FontWeight.w700,
@@ -62,7 +63,9 @@ class CycleInsightsCard extends StatelessWidget {
                       color: iconColor.withOpacity(0.2),
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(icon, size: 16.sp, color: iconColor),
+                    child: Center(
+                      child: svgIcon,
+                    ),
                   ),
                   SizedBox(width: 10.w),
                   Flexible(

@@ -38,6 +38,12 @@ class AppIcons{
   static String heavyIcon = "$baseUrl/heavyIcon.svg";
   static String insightFillup = "$baseUrl/insight_fillup.svg";
   static String insightIcon = "$baseUrl/insightIcon.svg";
+  static String openIcon = "$baseUrl/openIcon.svg";
+  static String sideBarIcon = "$baseUrl/sideBarIcon.svg";
+  static String mindIcon = "$baseUrl/mindIcon.svg";
+  static String noticeIcon = "$baseUrl/noticeIcon.svg";
+  static String cycleIcon = "$baseUrl/cycleIcon.svg";
+  static String suggestionIcon = "$baseUrl/suggestionIcon.svg";
 
 
 
