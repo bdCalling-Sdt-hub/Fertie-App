@@ -82,17 +82,25 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
 
               SizedBox(height: 20.h),
-
-              /// Sing In Button
-              Obx((){
+              // =================>> Sing In
+              /// for signInMethod uncomment below code
+           /*   Obx((){
                 return CustomButton(
-                  loading: authController.signInLoading.value,
+                loading: authController.signInLoading.value,
                   onTap: () {
-                    authController.signInMethod();
+                  authController.signInMethod();
+                    Get.toNamed(AppRoutes.homeScreen);
                   },
                   text: 'Log In',
                 );
-              }),
+              }),*/
+
+            CustomButton(
+              onTap: () {
+                Get.toNamed(AppRoutes.homeScreen);
+              },
+              text: 'Log In',
+            ),
 
 
               ///==================> Have and Account <===================

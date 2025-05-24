@@ -30,14 +30,15 @@ class _HomeChatWidgetState extends State<HomeChatWidget> {
     final double sidebarWidth = 180;
 
     return SizedBox(
-      height: 380,
+      height: 380.h,
       child: Stack(
         children: [
           // Main chat container
           Container(
             decoration: BoxDecoration(
               color: AppColors.colorEBF1EF,
-              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: AppColors.blackColor),
+              borderRadius: BorderRadius.circular(16.r),
             ),
             child: Column(
               children: [
@@ -46,10 +47,9 @@ class _HomeChatWidgetState extends State<HomeChatWidget> {
                   height: 40,
                   decoration: BoxDecoration(
                     color: AppColors.color7D9EBB,
-                    borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(8)),
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  padding: EdgeInsets.symmetric(horizontal: 12.w),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -75,43 +75,38 @@ class _HomeChatWidgetState extends State<HomeChatWidget> {
                   ),
                 ),
 
-                const SizedBox(height: 10),
+                SizedBox(height: 10.h),
 
                 // Messages area
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    padding:  EdgeInsets.symmetric(horizontal: 12.w),
                     child: ListView(
-                      physics: const NeverScrollableScrollPhysics(),
+                      physics: NeverScrollableScrollPhysics(),
                       children: [
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 14, vertical: 10),
-                            margin: const EdgeInsets.only(bottom: 4),
+                            padding:  EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
+                            margin:  EdgeInsets.only(bottom: 4.r),
                             decoration: BoxDecoration(
                               color: AppColors.primaryColor,
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(16),
-                                topRight: Radius.circular(16),
-                                bottomRight: Radius.circular(16),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(16.r),
+                                topRight: Radius.circular(16.r),
+                                bottomRight: Radius.circular(16.r),
                               ),
                             ),
                             child:  Text(
                               'How are you feeling today ?',
-                              style: TextStyle(color: AppColors.blackColor, fontSize: 14),
+                              style: TextStyle(color: AppColors.blackColor, fontSize: 14.sp),
                             ),
                           ),
                         ),
 
                         Padding(
-                          padding: const EdgeInsets.only(left: 10, bottom: 12),
-                          child: Text(
-                            '12:10pm',
-                            style: TextStyle(
-                                fontSize: 10, color: Colors.grey[600]),
-                          ),
+                          padding: EdgeInsets.only(left: 10.r, bottom: 12.r),
+                          child: Text('12:10pm', style: TextStyle(fontSize: 10, color: Colors.grey[600])),
                         ),
 
                         Align(
@@ -122,31 +117,27 @@ class _HomeChatWidgetState extends State<HomeChatWidget> {
                             children: [
                               Flexible(
                                 child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 14, vertical: 10),
-                                  margin: const EdgeInsets.only(bottom: 4),
+                                  padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
+                                  margin:  EdgeInsets.only(bottom: 4),
                                   decoration: BoxDecoration(
                                     color: AppColors.color7D9EBB,
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(16),
-                                      topRight: Radius.circular(16),
-                                      bottomLeft: Radius.circular(16),
+                                    borderRadius:  BorderRadius.only(
+                                      topLeft: Radius.circular(16.r),
+                                      topRight: Radius.circular(16.r),
+                                      bottomLeft: Radius.circular(16.r),
                                     ),
                                   ),
-                                  child: const Text(
+                                  child:  Text(
                                     'Great , and you?',
-                                    style: TextStyle(color: Colors.black87, fontSize: 14),
+                                    style: TextStyle(color: Colors.black87, fontSize: 14.sp),
                                   ),
                                 ),
                               ),
-
-                              const SizedBox(width: 6),
-
+                              SizedBox(width: 6.w),
                               CircleAvatar(
-                                radius: 12,
+                                radius: 12.r,
                                 backgroundColor: Colors.grey[400],
-                                child: const Icon(Icons.person,
-                                    size: 16, color: Colors.white),
+                                child: Icon(Icons.person, size: 16.sp, color: Colors.white),
                               ),
                             ],
                           ),
@@ -191,20 +182,20 @@ class _HomeChatWidgetState extends State<HomeChatWidget> {
                   ),
                   child: Row(
                     children: [
-                      Icon(Icons.emoji_emotions_outlined, color: Colors.grey[600]),
-                      const SizedBox(width: 8),
-                      const Expanded(
+                       Expanded(
                         child: TextField(
                           decoration: InputDecoration(
                             hintText: 'Ask Fertie anything...',
                             border: InputBorder.none,
                             isDense: true,
-                            contentPadding: EdgeInsets.symmetric(vertical: 12),
+                            contentPadding: EdgeInsets.symmetric(vertical: 12.r),
                           ),
                         ),
                       ),
+                      Icon(Icons.emoji_emotions_outlined, color: Colors.grey[600]),
+                      SizedBox(width: 8.w),
                       IconButton(
-                        icon: const Icon(Icons.send_rounded, color: Colors.grey),
+                        icon: Icon(Icons.send_rounded, color: Colors.grey),
                         onPressed: () {},
                       ),
                     ],
@@ -232,10 +223,10 @@ class _HomeChatWidgetState extends State<HomeChatWidget> {
               child: Column(
                 children: [
                   Container(
-                    height: 40,
+                    height: 40.h,
                     alignment: Alignment.topLeft,
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.r),
                       child: GestureDetector(
                         onTap: toggleSidebar,
                         child: SvgPicture.asset(AppIcons.sideBarIcon, color: Colors.white),

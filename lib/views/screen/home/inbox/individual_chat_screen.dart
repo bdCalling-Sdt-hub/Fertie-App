@@ -172,8 +172,6 @@ class _IndividualChatIScreenState extends State<IndividualChatIScreen> {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.emoji_emotions_outlined, color: Colors.grey[600]),
-                  const SizedBox(width: 8),
                   const Expanded(
                     child: TextField(
                       decoration: InputDecoration(
@@ -184,6 +182,8 @@ class _IndividualChatIScreenState extends State<IndividualChatIScreen> {
                       ),
                     ),
                   ),
+                  Icon(Icons.emoji_emotions_outlined, color: Colors.grey[600]),
+                  const SizedBox(width: 8),
                   IconButton(
                     icon: const Icon(Icons.send_rounded, color: Colors.grey),
                     onPressed: () {},
