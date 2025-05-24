@@ -233,7 +233,6 @@ class _HomeChatWidgetState extends State<HomeChatWidget> {
                       ),
                     ),
                   ),
-
                   // Sidebar content
                   Expanded(
                     child: ListView(
