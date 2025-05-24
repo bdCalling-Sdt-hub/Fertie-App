@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../utils/app_constants.dart';
 
 class PrefsHelper extends GetxController {
   static String token = "";

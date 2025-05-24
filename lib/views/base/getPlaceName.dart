@@ -1,5 +1,4 @@
 import 'package:geocoding/geocoding.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 class GetPlaceNameFromLatLong {
   //====================== Get place name

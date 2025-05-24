@@ -1,3 +1,4 @@
+import 'package:fertie_application/controller/auth/auth_controller.dart';
 import 'package:fertie_application/helpers/route.dart';
 import 'package:fertie_application/utils/app_colors.dart';
 import 'package:fertie_application/utils/app_strings.dart';
@@ -18,8 +19,8 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  TextEditingController emailCtrl = TextEditingController();
-  TextEditingController passCtrl = TextEditingController();
+  final AuthController authController = Get.put(AuthController());
+
   @override
   Widget build(BuildContext context) {
 
@@ -52,15 +53,16 @@ class _SignInScreenState extends State<SignInScreen> {
               CustomTextField(
                   filColor: AppColors.white,
                   hintText: 'Enter Email',
-                  controller: emailCtrl),
+                  controller: authController.emailCtrl),
               Padding(
                 padding:  EdgeInsets.symmetric(vertical: 8.r),
                 child: Text('Password',style: AppStyles.fontSize16(fontWeight: FontWeight.w600)),
               ),
               CustomTextField(
+                isPassword: true,
                   filColor: AppColors.white,
                   hintText: 'Enter Password',
-                  controller: passCtrl),
+                  controller: authController.passCtrl),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -80,14 +82,26 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
 
               SizedBox(height: 20.h),
+              // =================>> Sing In
+              /// for signInMethod uncomment below code
+           /*   Obx((){
+                return CustomButton(
+                loading: authController.signInLoading.value,
+                  onTap: () {
+                  authController.signInMethod();
+                    Get.toNamed(AppRoutes.homeScreen);
+                  },
+                  text: 'Log In',
+                );
+              }),*/
 
-              /// Sing In Button
-              CustomButton(
-                onTap: () {
-                  Get.toNamed(AppRoutes.homeScreen);
-                },
-                text:'Log In',
-              ),
+            CustomButton(
+              onTap: () {
+                Get.toNamed(AppRoutes.homeScreen);
+              },
+              text: 'Log In',
+            ),
+
 
               ///==================> Have and Account <===================
               SizedBox(height: 10.h),
