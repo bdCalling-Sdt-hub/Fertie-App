@@ -25,7 +25,6 @@ class _CycleInsightsScreenState extends State<CycleInsightsScreen> {
 
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
