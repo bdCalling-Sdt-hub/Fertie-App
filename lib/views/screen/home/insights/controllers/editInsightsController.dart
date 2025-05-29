@@ -32,7 +32,7 @@ class EditInsightsController extends GetxController {
     'Sad': AppImages.sadImage,
     'Angry': AppImages.angry,
     'Questioning':AppImages.questioning,
-    'In pain': AppImages.inPain,
+    'In pain': AppImages.questioning,
     'Cramping':AppImages.cramping,
     'Content': AppImages.content,
     'Embarrassed': AppImages.embarrassed,

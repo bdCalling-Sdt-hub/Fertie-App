@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 navigatorKey: Get.key,
                 // theme: themeController.darkTheme ? dark(): light(),
-                theme: light(),
+                theme: FAppTheme.lightTheme,
                 defaultTransition: Transition.topLevel,
                 locale: localizeController.locale,
                 translations: Messages(languages: languages),

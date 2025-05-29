@@ -1,20 +1,23 @@
+import 'package:fertie_application/helpers/route.dart';
 import 'package:fertie_application/utils/app_colors.dart';
 import 'package:fertie_application/utils/app_icons.dart';
 import 'package:fertie_application/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 
 
-class EditCycleInsightScreen extends StatefulWidget {
-  const EditCycleInsightScreen({super.key});
+class InsightsScreen extends StatefulWidget {
+  const InsightsScreen({super.key});
 
   @override
-  State<EditCycleInsightScreen> createState() => _EditCycleInsightScreenState();
+  State<InsightsScreen> createState() => _InsightsScreenState();
 }
 
-class _EditCycleInsightScreenState extends State<EditCycleInsightScreen> {
+class _InsightsScreenState extends State<InsightsScreen> {
   TextEditingController textEditingController = TextEditingController();
 
 
@@ -31,7 +34,7 @@ class _EditCycleInsightScreenState extends State<EditCycleInsightScreen> {
       backgroundColor: AppColors.secondColor,
       appBar: AppBar(
         backgroundColor: AppColors.secondColor,
-        title:  Text('Cycle Insight',style: AppStyles.fontSize24(fontWeight: FontWeight.w600)),
+        title:  Text('Insight',style: AppStyles.fontSize24(fontWeight: FontWeight.w600)),
         centerTitle: true,
       ),
       body: Padding(
@@ -40,8 +43,21 @@ class _EditCycleInsightScreenState extends State<EditCycleInsightScreen> {
           child: Column(
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('January 12, Thursday',style: AppStyles.fontSize16(fontWeight: FontWeight.w600)),
+                  Text('Today Cycle Insights:',style: AppStyles.fontSize16(fontWeight: FontWeight.w600)),
+                  GestureDetector(
+                    onTap: (){
+                      Get.toNamed(AppRoutes.editInsightsScreen);
+                    },
+                    child: Row(
+                      children: [
+                        Text('Edit Insights:',style: AppStyles.fontSize16(fontWeight: FontWeight.w600)),
+                        SizedBox(width: 4),
+                        Icon(Icons.edit)
+                      ],
+                    ),
+                  ),
                 ],
               ),
               SizedBox(height: 10.h),

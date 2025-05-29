@@ -7,7 +7,7 @@ import 'package:fertie_application/views/screen/auth/resetPassword_screen.dart';
 import 'package:fertie_application/views/screen/auth/setPasswordScreen.dart';
 import 'package:fertie_application/views/screen/auth/signInScreen.dart';
 import 'package:fertie_application/views/screen/auth/signUpScreen.dart';
-import 'package:fertie_application/views/screen/cycle_insights/cycleInsights_edit_screen.dart';
+import 'package:fertie_application/views/screen/home/insights/insight_screen.dart';
 import 'package:fertie_application/views/screen/cycle_insights/cycle_insights_screen.dart';
 import 'package:fertie_application/views/screen/home/inbox/individual_chat_screen.dart';
 import 'package:fertie_application/views/screen/home/insights/editInsights_screen.dart';
@@ -75,6 +75,7 @@ class AppRoutes{
   static String editInsightsScreen = "/editInsightsScreen";
   static String cycleInsightsScreen = "/cycleInsightsScreen";
   static String individualChatIScreen = "/individualChatIScreen";
+  static String insightScreen = "/insightScreen";
 
 
 
@@ -102,7 +103,7 @@ class AppRoutes{
 
    //CycleInsight
 
-   GetPage(name:editCycleInsightScreen, page: ()=> EditCycleInsightScreen(),transition: Transition.noTransition),
+   GetPage(name:insightScreen, page: ()=> InsightsScreen(),transition: Transition.noTransition),
    GetPage(name:cycleInsightsScreen, page: ()=> CycleInsightsScreen(),transition: Transition.noTransition),
 
    //Profile

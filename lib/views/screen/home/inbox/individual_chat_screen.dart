@@ -64,7 +64,7 @@ class _IndividualChatIScreenState extends State<IndividualChatIScreen> {
                   ),
                   GestureDetector(
                       onTap: (){
-                       // Get.toNamed(AppRoutes.individualChatIScreen);
+                      Get.back();
                       },
                       child: SvgPicture.asset(AppIcons.openIcon, color: Colors.black)),
                 ],

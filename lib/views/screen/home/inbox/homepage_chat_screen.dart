@@ -37,7 +37,7 @@ class _HomeChatWidgetState extends State<HomeChatWidget> {
           Container(
             decoration: BoxDecoration(
               color: AppColors.colorEBF1EF,
-              border: Border.all(color: AppColors.blackColor),
+              border: Border.all(color: AppColors.blueColor),
               borderRadius: BorderRadius.circular(16.r),
             ),
             child: Column(
@@ -348,8 +348,7 @@ Widget openDrawer(BuildContext context) {
                 child: Icon(Icons.person, size: 40, color: Colors.black54),
               ),
               const SizedBox(height: 10),
-              Text('Chat Menu',
-                  style: AppStyles.fontSize16(fontWeight: FontWeight.bold)),
+              Text('Chat Menu', style: AppStyles.fontSize16(fontWeight: FontWeight.bold)),
             ],
           ),
         ),

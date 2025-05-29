@@ -23,8 +23,8 @@ class UserBottomMenu extends StatelessWidget {
           padding:  EdgeInsets.only(top: 4.h),
           child: SvgPicture.asset(
             image,
-            height: 24.h,
-            width: 24.w,
+            height: 27.h, // 24 in figma
+            width: 27.w,
           ),
         ));
   }
@@ -51,10 +51,12 @@ class UserBottomMenu extends StatelessWidget {
         ],
       ),
       child: BottomNavigationBar(
+        selectedLabelStyle: TextStyle(color: AppColors.primaryColor2),
+        unselectedLabelStyle: TextStyle(color: Colors.grey),
         backgroundColor: AppColors.white,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: AppColors.white,
-        unselectedItemColor: AppColors.white,
+        selectedItemColor: AppColors.primaryColor2,
+        unselectedItemColor: AppColors.greyColor,
         currentIndex: menuIndex,
         onTap: (value) {
           switch (value) {
@@ -70,7 +72,6 @@ class UserBottomMenu extends StatelessWidget {
             case 3:
               Get.offAndToNamed(AppRoutes.notificationScreen);
               break;
-
           }
         },
         items: menuItems,

@@ -1,24 +1,42 @@
+import 'package:fertie_application/themes/text_theme.dart';
+import 'package:fertie_application/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+class FAppTheme {
+  FAppTheme._();
 
-import '../utils/app_colors.dart' show AppColors;
+  static ThemeData lightTheme = ThemeData(
+    useMaterial3: true,
+    fontFamily: GoogleFonts.poppins().fontFamily,
+    brightness: Brightness.light,
+    // primaryColor: Colors.blue,
+    textTheme: FTextTheme.lightTextTheme,
+    // chipTheme: TChipTheme.lightChipTheme,
+    scaffoldBackgroundColor: AppColors.backgroundColor,
+    // appBarTheme: TAppBarTheme. lightAppBarTheme,
+    // checkboxTheme: TCheckboxTheme.lightCheckboxTheme,
+    // bottomSheetTheme: TBottomSheetTheme.lightBottomSheetTheme,
+    // elevatedButtonTheme: TElevatedButtonTheme.lightElevatedButtonTheme,
+    // outlinedButtonTheme: TOutlinedButtonTheme.lightOutlinedButtonTheme,
+    // textButtonTheme: TTextButtonTheme.lightTextButtonTheme,
+    // inputDecorationTheme: TTextFormFieldTheme.lightInputDecorationTheme,
+  );
 
-ThemeData light({Color color = const Color(0xFF039D55)}) => ThemeData(
-      fontFamily: 'Nunito',
-      primaryColor: color,
-      scaffoldBackgroundColor: Colors.transparent,
-      secondaryHeaderColor: const Color(0xFF1ED7AA),
-      disabledColor: const Color(0xFFBABFC4),
-      brightness: Brightness.light,
-      hintColor: const Color(0xFF9F9F9F),
-      cardColor: Colors.white,
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: AppColors.bottomBarColor,
-        elevation: 5,
-      ),
-      textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(foregroundColor: color)),
-      colorScheme: ColorScheme.light(primary: color, secondary: color)
-          .copyWith(background: const Color(0xFFF3F3F3))
-          .copyWith(error: Color(0xFFE84D4F)),
-    );
+  // static ThemeData darkTheme = ThemeData(
+  //   useMaterial3: true,
+  //   fontFamily: GoogleFonts.poppins().fontFamily,
+  //   brightness: Brightness.dark,
+  //   primaryColor: Colors.blue,
+  //   textTheme: TTextTheme.darkTextTheme,
+  //   chipTheme: TChipTheme.darkChipTheme,
+  //   scaffoldBackgroundColor: Colors.black,
+  //   appBarTheme: TAppBarTheme.darkAppBarTheme,
+  //   checkboxTheme: TCheckboxTheme.darkCheckboxTheme,
+  //   bottomSheetTheme: TBottomSheetTheme.darkBottomSheetTheme,
+  //   elevatedButtonTheme: TElevatedButtonTheme.darkElevatedButtonTheme,
+  //   outlinedButtonTheme: TOutlinedButtonTheme.darkOutlinedButtonTheme,
+  //   textButtonTheme: TTextButtonTheme.darkTextButtonTheme,
+  //   inputDecorationTheme: TTextFormFieldTheme.darkInputDecorationTheme,
+  // );
+}
