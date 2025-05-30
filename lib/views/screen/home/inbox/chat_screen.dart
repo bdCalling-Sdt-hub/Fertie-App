@@ -1,0 +1,215 @@
+import 'package:fertie_application/utils/app_colors.dart';
+import 'package:fertie_application/utils/app_icons.dart';
+import 'package:fertie_application/utils/style.dart';
+import 'package:fertie_application/views/screen/home/inbox/controller/chat_controller.dart';
+import 'package:fertie_application/views/screen/home/inbox/models/chat_message_model.dart';
+import 'package:fertie_application/views/screen/home/inbox/widgets/typing_dot_animation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import '../../../../utils/app_images.dart';
+
+class ChatScreen extends StatefulWidget {
+  const ChatScreen({super.key});
+
+  @override
+  State<ChatScreen> createState() => _ChatScreenState();
+}
+class _ChatScreenState extends State<ChatScreen> {
+  final TextEditingController chatTextFieldController = TextEditingController();
+  final ChatController chatController = Get.put(ChatController());
+  final ScrollController _scrollController = ScrollController();
+
+  void _scrollToBottom() {
+    if (_scrollController.hasClients) {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent + 100,
+        duration: Duration(microseconds: 300), curve: Curves.easeOut,
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    ever(chatController.messages, (_) => _scrollToBottom());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final messages = chatController.messages;
+    return Scaffold(
+      backgroundColor: Colors.grey[200],
+      body: SafeArea(
+        child: Column(
+          children: [
+            buildTopBarContainer(),
+            Expanded(
+              child: Obx(() {
+                return ListView.builder(
+                  controller: _scrollController,
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                  itemCount: messages.length,
+                  itemBuilder: (context, index) {
+                    return _buildMessage(chatController.messages[index]);
+                  },
+                );
+              }),
+            ),
+
+            // bot typing animation
+            Obx(() {
+              if (chatController.isTyping.value) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+                  child: TypingDotAnimation(),
+                );
+              } else {
+                return SizedBox.shrink();
+              }
+            }),
+
+            // Input area
+            buildTextInputContainer(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMessage(ChatMessage message) {
+    final alignment = message.isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start;
+    final bgColor = message.isMe ? AppColors.userMessageColor : AppColors.botMessageColor;
+    final avatar = message.isMe
+        ? Container(
+      decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(
+              color: Colors.grey.shade400
+          )
+      ),
+      child: CircleAvatar(
+        backgroundColor: Colors.grey[200],
+        child: Icon(Icons.person_2_rounded, color: Colors.grey[400], size: 30,),
+      ),
+    )
+        : Image.asset(AppImages.cuteAppLogo, height: 40, width: 40);
+
+
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      child: Row(
+        mainAxisAlignment: message.isMe
+            ? MainAxisAlignment.end
+            : MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // avatar
+          if (!message.isMe) avatar,
+          SizedBox(width: 8),
+
+          // message and time
+          Flexible(
+            child: Column(
+              crossAxisAlignment: alignment,
+              children: [
+                // the message it self
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: bgColor,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(message.text),
+                ),
+                SizedBox(height: 4),
+                // sent time
+                Text(
+                  '${message.time.hour}:${message.time.minute.toString().padLeft(2, '0')}',
+                  style: TextStyle(fontSize: 12, color: Colors.grey[600]),),
+              ],
+            ),
+          ),
+          if (message.isMe) SizedBox(width: 8),
+          if (message.isMe) avatar,
+        ],
+      ),
+    ); //
+  }
+
+  Widget buildTopBarContainer() {
+    return Container(
+      height: 40,
+      decoration: BoxDecoration(
+        color: AppColors.color7D9EBB,
+        borderRadius:
+        const BorderRadius.vertical(top: Radius.circular(8)),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          // SizedBox(width: 2),
+          GestureDetector(
+            onTap: () {
+              print('Sidebar icon clicked');
+              //   toggleSidebar();
+            },
+            child: SvgPicture.asset(AppIcons.sideBarIcon, color: Colors.black),
+          ),
+          Text(
+            'Chat with Fertie - Cycle Day 10',
+            style: AppStyles.fontSize16(
+                color: AppColors.blackColor,
+                fontWeight: FontWeight.w600),
+          ),
+          GestureDetector(
+              onTap: () {
+                Get.back();
+              },
+              child: SvgPicture.asset(AppIcons.openIcon, color: Colors.black)),
+        ],
+      ),
+    );
+  }
+
+  Widget buildTextInputContainer() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      padding: const EdgeInsets.only(top: 6, right: 4, left: 18, bottom: 6),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(30),
+          border: Border.all(color: Colors.grey),
+          boxShadow: [
+            BoxShadow(color: Colors.black.withValues(alpha: 0.2), blurRadius: 0.7, offset: Offset(0, 3))
+          ]
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              controller: chatController.chatTextFieldController,
+              decoration: InputDecoration(
+                hintText: 'Ask Fertie anything...',
+                hintStyle: TextStyle(color: Colors.black.withValues(alpha: 0.3)),
+                border: InputBorder.none,
+                isDense: true,
+                contentPadding: EdgeInsets.symmetric(vertical: 12),
+              ),
+              // onSubmitted: ,
+            ),
+          ),
+          Icon(Icons.emoji_emotions_outlined, color: Colors.grey[600]),
+          const SizedBox(width: 8),
+          IconButton(
+            icon: const Icon(Icons.send_rounded, color: Colors.grey),
+            onPressed: () {
+              chatController.sendMessage();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}

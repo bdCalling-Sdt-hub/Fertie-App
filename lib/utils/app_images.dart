@@ -4,7 +4,11 @@ class AppImages{
   static const String passwordChangeAnimation = 'assets/animation/passwordDone.json';
 
   static String appLogo = "$baseUrl/appLogo.png";
-  static String cuteappLogo = "$baseUrl/cuteappLogo.png";
+
+  // chat
+  static String fertieEmoji = "$baseUrl/Emoji.png";
+  static String send = "$baseUrl/Send.png";
+  static String cuteAppLogo = "$baseUrl/cuteappLogo.png";
   static String happyImage = "$baseUrl/happy.png";
   static String cryImage = "$baseUrl/crying.png";
   static String indifferent = "$baseUrl/indifferentImage.png";

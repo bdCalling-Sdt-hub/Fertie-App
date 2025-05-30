@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Image.asset(AppImages.cuteappLogo, height: 60, width: 60),
+                              Image.asset(AppImages.cuteAppLogo, height: 60, width: 60),
                               SizedBox(width: 8.w),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,

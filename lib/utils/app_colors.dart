@@ -36,7 +36,8 @@ class AppColors{
 
   static Color blackColor=const Color(0xFF010101);
   static Color color565656 =const Color(0xFF565656);
-  static Color receivedChatColor=const Color(0xFF202B33);
+  static Color botMessageColor=const Color(0xFFFFD4C6);
+  static Color userMessageColor=const Color(0xFFE1DAD3);
   static Color blueColor=const Color(0xFF217CC2);
   static Color cardColor = const Color(0xFFEDF2F4);
   static Color color5C5C5C = const Color(0xFF5C5C5C);

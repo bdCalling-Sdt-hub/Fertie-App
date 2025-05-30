@@ -28,7 +28,7 @@ class _PersonalizeScreenState extends State<PersonalizeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.asset(AppImages.cuteappLogo),
+            Image.asset(AppImages.cuteAppLogo),
 
             Text('We’d love to customize your \nexperience. Please share a few \ndetails to get started.',style: AppStyles.fontSize24(fontWeight: FontWeight.w600)),
             SizedBox(height: 20.h),

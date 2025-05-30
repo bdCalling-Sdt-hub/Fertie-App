@@ -2,6 +2,8 @@ import 'package:fertie_application/helpers/route.dart';
 import 'package:fertie_application/utils/app_colors.dart';
 import 'package:fertie_application/utils/app_icons.dart';
 import 'package:fertie_application/utils/style.dart';
+import 'package:fertie_application/views/screen/home/inbox/widgets/typing_dot.dart';
+import 'package:fertie_application/views/screen/home/inbox/widgets/typing_dot_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -128,7 +130,7 @@ class _HomeChatWidgetState extends State<HomeChatWidget> {
                                     ),
                                   ),
                                   child:  Text(
-                                    'Great , and you?',
+                                    'Great, and you?',
                                     style: TextStyle(color: Colors.black87, fontSize: 14.sp),
                                   ),
                                 ),
@@ -151,19 +153,7 @@ class _HomeChatWidgetState extends State<HomeChatWidget> {
                           ),
                         ),
 
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: const [
-                              TypingDot(),
-                              SizedBox(width: 6),
-                              TypingDot(delay: 200),
-                              SizedBox(width: 6),
-                              TypingDot(delay: 400),
-                            ],
-                          ),
-                        ),
+                        TypingDotAnimation(),
 
                         const SizedBox(height: 10),
                       ],
@@ -276,57 +266,11 @@ class _HomeChatWidgetState extends State<HomeChatWidget> {
 }
 
 
-class TypingDot extends StatefulWidget {
-  final int delay;
-  const TypingDot({super.key, this.delay = 0});
 
-  @override
-  State<TypingDot> createState() => _TypingDotState();
-}
 
-class _TypingDotState extends State<TypingDot> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
 
-  @override
-  void initState() {
-    super.initState();
 
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 900),
-    );
 
-    _animation = Tween<double>(begin: 0.3, end: 1).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
-
-    Future.delayed(Duration(milliseconds: widget.delay), () {
-      if (mounted) _controller.repeat(reverse: true);
-    });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return FadeTransition(
-      opacity: _animation,
-      child: Container(
-        width: 10,
-        height: 10,
-        decoration:  BoxDecoration(
-          color: AppColors.primaryColor,
-          shape: BoxShape.circle,
-        ),
-      ),
-    );
-  }
-}
 
 // Drawer widget function you provided
 Widget openDrawer(BuildContext context) {
