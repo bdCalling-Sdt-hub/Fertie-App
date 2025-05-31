@@ -10,21 +10,30 @@ import 'package:get/get.dart';
 import '../../../../utils/app_images.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key});
+  final bool isFullScreen;
+  final VoidCallback? onExpandTap;
+
+  const ChatScreen({
+    super.key,
+    this.isFullScreen = true,
+    this.onExpandTap,
+  });
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
+  State<ChatScreen> createState() => ChatScreenState();
 }
-class _ChatScreenState extends State<ChatScreen> {
+
+class ChatScreenState extends State<ChatScreen> {
   final TextEditingController chatTextFieldController = TextEditingController();
-  final ChatController chatController = Get.put(ChatController());
+  late final ChatController chatController;
   final ScrollController _scrollController = ScrollController();
 
   void _scrollToBottom() {
     if (_scrollController.hasClients) {
       _scrollController.animateTo(
         _scrollController.position.maxScrollExtent + 100,
-        duration: Duration(microseconds: 300), curve: Curves.easeOut,
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeOut,
       );
     }
   }
@@ -32,32 +41,39 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
+    // Use Get.find to get existing controller or create if not exists
+    chatController = Get.isRegistered<ChatController>()
+        ? Get.find<ChatController>()
+        : Get.put(ChatController());
+
     ever(chatController.messages, (_) => _scrollToBottom());
   }
 
   @override
   Widget build(BuildContext context) {
-    final messages = chatController.messages;
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: AppColors.chatBg,
+      // appBar: widget.isFullScreen ? AppBar(
+      //   // title: Text('Chat with Fertie - Cycle Day 10'),
+      //   // backgroundColor: AppColors.color7D9EBB,
+      // ) : null,
       body: SafeArea(
         child: Column(
           children: [
-            buildTopBarContainer(),
+            // if (!widget.isFullScreen)
+              buildTopBarContainer(),
             Expanded(
               child: Obx(() {
                 return ListView.builder(
                   controller: _scrollController,
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-                  itemCount: messages.length,
+                  itemCount: chatController.messages.length,
                   itemBuilder: (context, index) {
                     return _buildMessage(chatController.messages[index]);
                   },
                 );
               }),
             ),
-
-            // bot typing animation
             Obx(() {
               if (chatController.isTyping.value) {
                 return Padding(
@@ -68,8 +84,6 @@ class _ChatScreenState extends State<ChatScreen> {
                 return SizedBox.shrink();
               }
             }),
-
-            // Input area
             buildTextInputContainer(),
           ],
         ),
@@ -84,36 +98,26 @@ class _ChatScreenState extends State<ChatScreen> {
         ? Container(
       decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(
-              color: Colors.grey.shade400
-          )
-      ),
+          border: Border.all(color: Colors.grey.shade400)),
       child: CircleAvatar(
         backgroundColor: Colors.grey[200],
-        child: Icon(Icons.person_2_rounded, color: Colors.grey[400], size: 30,),
+        child: Icon(Icons.person_2_rounded, color: Colors.grey[400], size: 30),
       ),
     )
         : Image.asset(AppImages.cuteAppLogo, height: 40, width: 40);
 
-
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       child: Row(
-        mainAxisAlignment: message.isMe
-            ? MainAxisAlignment.end
-            : MainAxisAlignment.start,
+        mainAxisAlignment: message.isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // avatar
           if (!message.isMe) avatar,
           SizedBox(width: 8),
-
-          // message and time
           Flexible(
             child: Column(
               crossAxisAlignment: alignment,
               children: [
-                // the message it self
                 Container(
                   padding: EdgeInsets.all(12),
                   decoration: BoxDecoration(
@@ -123,10 +127,10 @@ class _ChatScreenState extends State<ChatScreen> {
                   child: Text(message.text),
                 ),
                 SizedBox(height: 4),
-                // sent time
                 Text(
                   '${message.time.hour}:${message.time.minute.toString().padLeft(2, '0')}',
-                  style: TextStyle(fontSize: 12, color: Colors.grey[600]),),
+                  style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                ),
               ],
             ),
           ),
@@ -134,40 +138,41 @@ class _ChatScreenState extends State<ChatScreen> {
           if (message.isMe) avatar,
         ],
       ),
-    ); //
+    );
   }
 
   Widget buildTopBarContainer() {
     return Container(
       height: 40,
       decoration: BoxDecoration(
-        color: AppColors.color7D9EBB,
-        borderRadius:
-        const BorderRadius.vertical(top: Radius.circular(8)),
+        color: AppColors.chatTopBarColor,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
+        border: Border.all(color: AppColors.chatTopBarBorderColor)
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // SizedBox(width: 2),
           GestureDetector(
             onTap: () {
               print('Sidebar icon clicked');
-              //   toggleSidebar();
             },
             child: SvgPicture.asset(AppIcons.sideBarIcon, color: Colors.black),
           ),
           Text(
             'Chat with Fertie - Cycle Day 10',
             style: AppStyles.fontSize16(
-                color: AppColors.blackColor,
-                fontWeight: FontWeight.w600),
+                color: AppColors.blackColor, fontWeight: FontWeight.bold).copyWith(fontFamily: 'Nunito'),
           ),
+
+          // Expand/Collapse button
           GestureDetector(
-              onTap: () {
-                Get.back();
-              },
-              child: SvgPicture.asset(AppIcons.openIcon, color: Colors.black)),
+            onTap: !widget.isFullScreen ? widget.onExpandTap : Get.back,
+            child: SvgPicture.asset(
+              AppIcons.openIcon,
+              color: Colors.black,
+            ),
+          ),
         ],
       ),
     );
@@ -183,8 +188,7 @@ class _ChatScreenState extends State<ChatScreen> {
           border: Border.all(color: Colors.grey),
           boxShadow: [
             BoxShadow(color: Colors.black.withValues(alpha: 0.2), blurRadius: 0.7, offset: Offset(0, 3))
-          ]
-      ),
+          ]),
       child: Row(
         children: [
           Expanded(
@@ -197,7 +201,6 @@ class _ChatScreenState extends State<ChatScreen> {
                 isDense: true,
                 contentPadding: EdgeInsets.symmetric(vertical: 12),
               ),
-              // onSubmitted: ,
             ),
           ),
           Icon(Icons.emoji_emotions_outlined, color: Colors.grey[600]),

@@ -3,6 +3,7 @@ import 'package:fertie_application/controller/theme_controller.dart';
 import 'package:fertie_application/themes/light_theme.dart';
 import 'package:fertie_application/utils/app_constants.dart';
 import 'package:fertie_application/utils/message.dart';
+import 'package:fertie_application/views/screen/home/inbox/controller/chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,6 +12,7 @@ import 'helpers/di.dart' as di;
 import 'helpers/route.dart';
 
 void main() async {
+  // Get.put(ChatController());
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);

@@ -38,7 +38,7 @@ class _HomeChatWidgetState extends State<HomeChatWidget> {
           // Main chat container
           Container(
             decoration: BoxDecoration(
-              color: AppColors.colorEBF1EF,
+              color: AppColors.chatBg,
               border: Border.all(color: AppColors.blueColor),
               borderRadius: BorderRadius.circular(16.r),
             ),
@@ -48,7 +48,7 @@ class _HomeChatWidgetState extends State<HomeChatWidget> {
                 Container(
                   height: 40,
                   decoration: BoxDecoration(
-                    color: AppColors.color7D9EBB,
+                    color: AppColors.chatTopBarBorderColor,
                     borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
                   ),
                   padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -122,7 +122,7 @@ class _HomeChatWidgetState extends State<HomeChatWidget> {
                                   padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
                                   margin:  EdgeInsets.only(bottom: 4),
                                   decoration: BoxDecoration(
-                                    color: AppColors.color7D9EBB,
+                                    color: AppColors.chatTopBarBorderColor,
                                     borderRadius:  BorderRadius.only(
                                       topLeft: Radius.circular(16.r),
                                       topRight: Radius.circular(16.r),
@@ -204,7 +204,7 @@ class _HomeChatWidgetState extends State<HomeChatWidget> {
             width: sidebarWidth,
             child: Container(
               decoration: BoxDecoration(
-                color: AppColors.color7D9EBB,
+                color: AppColors.chatTopBarBorderColor,
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(8),
                   bottomLeft: Radius.circular(8),
