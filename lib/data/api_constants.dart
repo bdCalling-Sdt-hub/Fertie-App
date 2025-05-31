@@ -20,6 +20,7 @@ static const String baseUrl = "https://api.carrentpro.com/api/v1";
   //============================ >> User Auth << =================================
   static const String signInEndPoint = "/v1/auth/login";
 
-
+  //============================ >> Cycle Insight << =================================
+ static const String cycleInsightUrl = "/v1/chat/bot/cycleInsight";
 
 }

@@ -31,7 +31,7 @@ class AuthController extends GetxController {
 
     print("===================> $body");
 
-      Response response = await ApiClient.postData(
+      Response response = await ApiClient.postRequest(
         ApiConstants.signInEndPoint,
         body,
         headers: headers,

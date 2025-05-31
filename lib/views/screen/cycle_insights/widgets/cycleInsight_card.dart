@@ -1,6 +1,5 @@
 import 'package:fertie_application/utils/app_colors.dart';
 import 'package:fertie_application/utils/style.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -32,17 +31,19 @@ class CycleInsightsCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20.r),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(alpha: 0.15),
               blurRadius: 5.r,
-              offset: const Offset(0, 2),
+              offset: const Offset(0, 5),
             ),
           ],
         ),
         child: Padding(
-          padding: EdgeInsets.all(8.w),
+          padding: EdgeInsets.all(16.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+
+              //---------- header
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 8.h),
                 child: Text(
@@ -53,21 +54,27 @@ class CycleInsightsCard extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(height: 8),
+
+              //--------- Icon + Data
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Icon
                   Container(
                     width: 50.w,
                     height: 50.h,
                     decoration: BoxDecoration(
-                      color: iconColor.withOpacity(0.2),
+                      color: iconColor.withValues(alpha: 0.2),
                       shape: BoxShape.circle,
                     ),
                     child: Center(
                       child: svgIcon,
                     ),
                   ),
-                  SizedBox(width: 10.w),
+                  SizedBox(width: 16.w),
+
+                  // Data
                   Flexible(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
