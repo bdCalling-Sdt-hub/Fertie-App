@@ -148,7 +148,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                                     : event == 'fertile'
                                     ? AppColors.colorDFC7FF
                                     : event == 'ovulation'
-                                    ? AppColors.color7D9EBB
+                                    ? AppColors.chatTopBarBorderColor
                                     : event == 'menstruation'
                                     ? AppColors.colorFF5653
                                     : Colors.transparent,
