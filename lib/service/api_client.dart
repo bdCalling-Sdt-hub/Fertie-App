@@ -4,32 +4,33 @@ import 'package:fertie_application/data/api_constants.dart';
 import 'package:fertie_application/helpers/prefs_helpers.dart';
 import 'package:fertie_application/model/error_response_model.dart';
 import 'package:fertie_application/utils/app_constants.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+import 'package:logger/logger.dart';
 import 'package:mime_type/mime_type.dart';
 
 
 
 class ApiClient extends GetxService {
+  static final Logger _logger = Logger();
   static var client = http.Client();
   static const String noInternetMessage = "Can't connect to the internet!";
   static const int timeoutInSeconds = 30;
   static String bearerToken = "";
-//==========================================> Get Data <======================================
-  static Future<Response> getData(String uri,
+//==========================================> Get Request <======================================
+  static Future<Response> getRequest(String uri,
       {Map<String, dynamic>? query, Map<String, String>? headers}) async {
-    bearerToken = await PrefsHelper.getString(AppConstants.bearerToken);
+    // bearerToken = await PrefsHelper.getString(AppConstants.bearerToken);
+    bearerToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODFkNzU5MWRjNjM2MDdiN2QzZmYwYTIiLCJ1c2VyTmFtZSI6InVuZGVmaW5lZCB1bmRlZmluZWQiLCJlbWFpbCI6Im1AZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDg2NjExODcsImV4cCI6MTc0OTA5MzE4N30.U5bZkNeKq9c9A0AFloImPxO2SqeKuMWMhgb-X0kwjmc';
 
     var mainHeaders = {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json', // 'application/x-www-form-urlencoded'
       'Authorization': 'Bearer $bearerToken'
     };
     try {
-      debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
+      _logger.i('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
 
       http.Response response = await client.get(
         Uri.parse(ApiConstants.baseUrl + uri),
@@ -38,13 +39,13 @@ class ApiClient extends GetxService {
           .timeout(const Duration(seconds: timeoutInSeconds));
       return handleResponse(response, uri);
     } catch (e) {
-      debugPrint('------------${e.toString()}');
+      _logger.i('------------${e.toString()}');
       return const Response(statusCode: 1, statusText: noInternetMessage);
     }
   }
 
-//==========================================> Post Data <======================================
-  static Future<Response> postData(String uri, dynamic body,
+//==========================================> Post Request <======================================
+  static Future<Response> postRequest(String uri, dynamic body,
       {Map<String, String>? headers}) async {
     bearerToken = await PrefsHelper.getString(AppConstants.bearerToken);
 
@@ -74,7 +75,7 @@ class ApiClient extends GetxService {
     }
   }
   //==========================================> Post Data <======================================
-  static Future<Response> postDatax(String uri,
+  static Future<Response> postData(String uri,
       {Map<String, String>? headers}) async {
     bearerToken = await PrefsHelper.getString(AppConstants.bearerToken);
 
@@ -112,8 +113,8 @@ class ApiClient extends GetxService {
       'Authorization': 'Bearer $bearerToken'
     };
     try {
-      debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
-      debugPrint('====> API Body: $body');
+      _logger.i('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
+      _logger.i('====> API Body: $body');
 
       http.Response response = await client
           .post(
@@ -122,8 +123,8 @@ class ApiClient extends GetxService {
         headers: headers ?? mainHeaders,
       )
           .timeout(const Duration(seconds: timeoutInSeconds));
-      debugPrint(
-          "==========> Response Post Method :------ : ${response.statusCode}");
+      _logger.i(
+          "==========> Response Post Method:: ${response.statusCode}");
       return handleResponse(response, uri);
     } catch (e) {
       print("===> $e");
@@ -148,7 +149,7 @@ class ApiClient extends GetxService {
       int imageCount = 0;
       int documentCount = 0;
 
-      debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
+      _logger.i('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
 
       // Count the images and documents
       if (multipartBody != null && multipartBody.isNotEmpty) {
@@ -167,7 +168,7 @@ class ApiClient extends GetxService {
         });
       }
 
-      debugPrint('====> API Body: $body with $imageCount image(s) and $documentCount document(s)');
+      _logger.i('====> API Body: $body with $imageCount image(s) and $documentCount document(s)');
 
       var request =
       http.MultipartRequest('POST', Uri.parse(ApiConstants.baseUrl + uri));
@@ -175,10 +176,10 @@ class ApiClient extends GetxService {
 
       if (multipartBody!.isNotEmpty) {
         multipartBody.forEach((element) async {
-          debugPrint("path : ${element.file.path}");
+          _logger.i("path : ${element.file.path}");
 
           if (element.file.path.contains(".mp4")) {
-            debugPrint("media type mp4 ==== ${element.file.path}");
+            _logger.i("media type mp4 ==== ${element.file.path}");
             request.files.add(http.MultipartFile(
               element.key,
               element.file.readAsBytes().asStream(),
@@ -187,7 +188,7 @@ class ApiClient extends GetxService {
               contentType: MediaType('video', 'mp4'),
             ));
           } else if (element.file.path.contains(".png")) {
-            debugPrint("media type png ==== ${element.file.path}");
+            _logger.i("media type png ==== ${element.file.path}");
             request.files.add(http.MultipartFile(
               element.key,
               element.file.readAsBytes().asStream(),
@@ -196,7 +197,7 @@ class ApiClient extends GetxService {
               contentType: MediaType('image', 'png'),
             ));
           } else if (element.file.path.contains(".jpg")) {
-            debugPrint("media type jpg ==== ${element.file.path}");
+            _logger.i("media type jpg ==== ${element.file.path}");
             request.files.add(http.MultipartFile(
               element.key,
               element.file.readAsBytes().asStream(),
@@ -205,7 +206,7 @@ class ApiClient extends GetxService {
               contentType: MediaType('image', 'jpg'),
             ));
           } else if (element.file.path.contains(".jpeg")) {
-            debugPrint("media type jpeg ==== ${element.file.path}");
+            _logger.i("media type jpeg ==== ${element.file.path}");
             request.files.add(http.MultipartFile(
               element.key,
               element.file.readAsBytes().asStream(),
@@ -214,7 +215,7 @@ class ApiClient extends GetxService {
               contentType: MediaType('image', 'jpeg'),
             ));
           } else if (element.file.path.contains(".pdf")) {
-            debugPrint("media type pdf ==== ${element.file.path}");
+            _logger.i("media type pdf ==== ${element.file.path}");
             request.files.add(http.MultipartFile(
               element.key,
               element.file.readAsBytes().asStream(),
@@ -223,7 +224,7 @@ class ApiClient extends GetxService {
               contentType: MediaType('application', 'pdf'),
             ));
           } else if (element.file.path.contains(".xls") || element.file.path.contains(".xlsx")) {
-            debugPrint("media type excel ==== ${element.file.path}");
+            _logger.i("media type excel ==== ${element.file.path}");
             request.files.add(http.MultipartFile(
               element.key,
               element.file.readAsBytes().asStream(),
@@ -232,7 +233,7 @@ class ApiClient extends GetxService {
               contentType: MediaType('application', 'vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
             ));
           } else if (element.file.path.contains(".doc") || element.file.path.contains(".docx")) {
-            debugPrint("media type doc/docx ==== ${element.file.path}");
+            _logger.i("media type doc/docx ==== ${element.file.path}");
             request.files.add(http.MultipartFile(
               element.key,
               element.file.readAsBytes().asStream(),
@@ -247,7 +248,7 @@ class ApiClient extends GetxService {
       request.headers.addAll(mainHeaders);
       http.StreamedResponse response = await request.send();
       final content = await response.stream.bytesToString();
-      debugPrint('====> API Response: [${response.statusCode}}] $uri\n${content}');
+      _logger.i('====> API Response: [${response.statusCode}}] $uri\n$content');
 
       return Response(
           statusCode: response.statusCode,
@@ -272,8 +273,8 @@ class ApiClient extends GetxService {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $bearerToken'
       };
-      debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
-      debugPrint('====> API Body: $body with ${multipartBody?.length} picture');
+      _logger.i('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
+      _logger.i('====> API Body: $body with ${multipartBody?.length} picture');
 
       var request =
       http.MultipartRequest('POST', Uri.parse(ApiConstants.baseUrl + uri));
@@ -281,10 +282,10 @@ class ApiClient extends GetxService {
 
       if (multipartBody!.isNotEmpty) {
         multipartBody.forEach((element) async {
-          debugPrint("path : ${element.file.path}");
+          _logger.i("path : ${element.file.path}");
 
           if (element.file.path.contains(".mp4")) {
-            debugPrint("media type mp4 ==== ${element.file.path}");
+            _logger.i("media type mp4 ==== ${element.file.path}");
             request.files.add(http.MultipartFile(
               element.key,
               element.file.readAsBytes().asStream(),
@@ -293,7 +294,7 @@ class ApiClient extends GetxService {
               contentType: MediaType('video', 'mp4'),
             ));
           } else if (element.file.path.contains(".png")) {
-            debugPrint("media type png ==== ${element.file.path}");
+            _logger.i("media type png ==== ${element.file.path}");
             request.files.add(http.MultipartFile(
               element.key,
               element.file.readAsBytes().asStream(),
@@ -302,7 +303,7 @@ class ApiClient extends GetxService {
               contentType: MediaType('image', 'png'),
             ));
           } else if (element.file.path.contains(".jpg")) {
-            debugPrint("media type png ==== ${element.file.path}");
+            _logger.i("media type png ==== ${element.file.path}");
             request.files.add(http.MultipartFile(
               element.key,
               element.file.readAsBytes().asStream(),
@@ -311,7 +312,7 @@ class ApiClient extends GetxService {
               contentType: MediaType('image', 'jpg'),
             ));
           } else if (element.file.path.contains(".jpeg")) {
-            debugPrint("media type jpeg ==== ${element.file.path}");
+            _logger.i("media type jpeg ==== ${element.file.path}");
             request.files.add(http.MultipartFile(
               element.key,
               element.file.readAsBytes().asStream(),
@@ -326,7 +327,7 @@ class ApiClient extends GetxService {
       request.headers.addAll(mainHeaders);
       http.StreamedResponse response = await request.send();
       final content = await response.stream.bytesToString();
-      debugPrint(
+      _logger.i(
           '====> API Response: [${response.statusCode}}] $uri\n${content}');
 
       return Response(
@@ -348,8 +349,8 @@ class ApiClient extends GetxService {
       'Authorization': 'Bearer $bearerToken'
     };
     try {
-      debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
-      debugPrint('====> API Body: $body');
+      _logger.i('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
+      _logger.i('====> API Body: $body');
 
       http.Response response = await http
           .put(
@@ -377,8 +378,8 @@ class ApiClient extends GetxService {
         'Authorization': 'Bearer $bearerToken'
       };
 
-      debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
-      debugPrint('====> API Body: $body with ${multipartBody?.length} picture');
+      _logger.i('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
+      _logger.i('====> API Body: $body with ${multipartBody?.length} picture');
 
       var request =
       http.MultipartRequest('PUT', Uri.parse(ApiConstants.baseUrl + uri));
@@ -386,7 +387,7 @@ class ApiClient extends GetxService {
 
       if (multipartBody!.isNotEmpty) {
         multipartBody.forEach((element) async {
-          debugPrint("path : ${element.file.path}");
+          _logger.i("path : ${element.file.path}");
           String? mimeType = mime(element.file.path);
           request.files.add(http.MultipartFile(
             element.key,
@@ -399,7 +400,7 @@ class ApiClient extends GetxService {
       request.headers.addAll(mainHeaders);
       http.StreamedResponse response = await request.send();
       final content = await response.stream.bytesToString();
-      debugPrint(
+      _logger.i(
           '====> API Response: [${response.statusCode}}] $uri\n$content');
 
       return Response(
@@ -426,15 +427,15 @@ class ApiClient extends GetxService {
         'Authorization': 'Bearer $bearerToken'
       };
 
-      debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
-      debugPrint('====> API Body: $body with ${multipartBody?.length} picture');
+      _logger.i('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
+      _logger.i('====> API Body: $body with ${multipartBody?.length} picture');
       var request =
       http.MultipartRequest('PATCH', Uri.parse(ApiConstants.baseUrl + uri));
       request.fields.addAll(body);
 
       if (multipartBody!.isNotEmpty) {
         multipartBody.forEach((element) async {
-          debugPrint("path : ${element.file.path}");
+          _logger.i("path : ${element.file.path}");
           String? mimeType = mime(element.file.path);
           request.files.add(http.MultipartFile(
             element.key,
@@ -448,7 +449,7 @@ class ApiClient extends GetxService {
       request.headers.addAll(mainHeaders);
       http.StreamedResponse response = await request.send();
       final content = await response.stream.bytesToString();
-      debugPrint('====> API Response: [${response.statusCode}}] $uri\n$content');
+      _logger.i('====> API Response: [${response.statusCode}}] $uri\n$content');
 
       return Response(
           statusCode: response.statusCode,
@@ -469,7 +470,7 @@ class ApiClient extends GetxService {
       'Authorization': 'Bearer $bearerToken'
     };
     try {
-      debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
+      _logger.i('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
       http.Response response = await client
           .patch(
         Uri.parse(ApiConstants.baseUrl + uri),
@@ -479,7 +480,7 @@ class ApiClient extends GetxService {
           .timeout(const Duration(seconds: timeoutInSeconds));
       return handleResponse(response, uri);
     } catch (e) {
-      debugPrint('------------${e.toString()}');
+      _logger.i('------------${e.toString()}');
       return const Response(statusCode: 1, statusText: noInternetMessage);
     }
   }
@@ -494,8 +495,8 @@ class ApiClient extends GetxService {
       'Authorization': 'Bearer $bearerToken'
     };
     try {
-      debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
-      debugPrint('====> API Call: $uri\n Body: ${body}');
+      _logger.i('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
+      _logger.i('====> API Call: $uri\n Body: ${body}');
 
       http.Response response = await http
           .delete(Uri.parse(ApiConstants.baseUrl + uri),
@@ -513,7 +514,7 @@ class ApiClient extends GetxService {
     try {
       body = jsonDecode(response.body);
     } catch (e) {
-      debugPrint(e.toString());
+      _logger.i(e.toString());
     }
     Response response0 = Response(
       body: body ?? response.body,
@@ -538,7 +539,7 @@ class ApiClient extends GetxService {
       response0 = const Response(statusCode: 0, statusText: noInternetMessage);
     }
 
-    debugPrint('====> API Response: [${response0.statusCode}] $uri\n${response0.body}');
+    _logger.i('====> API Response: [${response0.statusCode}] $uri\n${response0.body}');
     return response0;
   }
 }
