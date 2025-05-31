@@ -6,6 +6,7 @@ import 'package:logger/logger.dart';
 
 class CycleInsightsController extends GetxController {
   Rx<CycleInsightsModel> cycleInsights = CycleInsightsModel().obs;
+  RxList<CycleInsightsModel> allCycleInsights = <CycleInsightsModel>[].obs;
   final Logger _logger = Logger();
   RxBool isLoading = false.obs;
 

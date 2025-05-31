@@ -1,7 +1,7 @@
 class CycleInsightsModel {
   int? code;
   String? message;
-  Data? data;
+  CycleInsightsData? data;
   bool? success;
 
   CycleInsightsModel({this.code, this.message, this.data, this.success});
@@ -9,7 +9,7 @@ class CycleInsightsModel {
   CycleInsightsModel.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? CycleInsightsData.fromJson(json['data']) : null;
     success = json['success'];
   }
 
@@ -25,12 +25,12 @@ class CycleInsightsModel {
   }
 }
 
-class Data {
+class CycleInsightsData {
   Attributes? attributes;
 
-  Data({this.attributes});
+  CycleInsightsData({this.attributes});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  CycleInsightsData.fromJson(Map<String, dynamic> json) {
     attributes = json['attributes'] != null
         ? Attributes.fromJson(json['attributes'])
         : null;

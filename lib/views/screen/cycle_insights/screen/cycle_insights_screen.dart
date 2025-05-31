@@ -44,37 +44,41 @@ class _CycleInsightsScreenState extends State<CycleInsightsScreen> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: Column(
-            children: [
-              CycleInsightsCard(
-                svgIcon: SvgPicture.asset(AppIcons.cycleIcon),
-                iconColor: Colors.redAccent,
-                headerText :'Your Current Cycle',
-                title: 'Cycle Day 10',
-                content: 'Cycle Day 14: Likely ovulating today (LH test + CM). Period: Apr 10, 5 days (light-heavy-light). Ovulation: LH surge on CD 13, egg white CM. Intercourse: CD 11, CD 13.',
-              ),
-              CycleInsightsCard(
-                svgIcon: SvgPicture.asset(AppIcons.suggestionIcon),
-                iconColor: Colors.redAccent,
-                backgroundColor: Color(0xFFEBF1EF),
-                headerText :'Fertie’s Suggestions for You',
-                content: '• You logged ovulation symptoms but didn\'t track LH—consider adding that xt cycle to boost prediction accuracy. \n • You\'ve had shorter luteal phases (10-11)days—this can affect implantation. soconsider bringing this up to your doctor. \n• Try logging mood and energy levelsaround ovulation. It can help Fertiefine-tune your score',
-              ),
-              CycleInsightsCard(
-                svgIcon: SvgPicture.asset(AppIcons.noticeIcon),
-                iconColor: Colors.redAccent,
-                headerText :'Patterns Fertie Noticed',
-                content: 'You logged ovulation symptoms but didn\'t track LH—consider adding that xt cycle to boost prediction accuracy You\'ve had shorter luteal phases (10-11).',
-              ),
-              CycleInsightsCard(
-                svgIcon: SvgPicture.asset(AppIcons.mindIcon),
-                iconColor: Colors.redAccent,
-                headerText :'What to Keep in Mind This Cycle',
-                content: 'You logged ovulation symptoms but didn\'t track LH—consider adding that xt cycle to boost prediction accuracy You\'ve had shorter luteal phases (10-11).',
-              ),
+          child: Obx((){
+            final content = cycleInsightController.cycleInsights.value.data?.attributes;
+            return Column(
+              children: [
+                CycleInsightsCard(
+                  svgIcon: SvgPicture.asset(AppIcons.cycleIcon),
+                  iconColor: Colors.redAccent,
+                  headerText :'Your Current Cycle',
+                  title: 'Cycle Day ${content?.cycleDay.toString() ?? ''}',
+                  // content: 'Cycle Day 14: Likely ovulating today (LH test + CM). Period: Apr 10, 5 days (light-heavy-light). Ovulation: LH surge on CD 13, egg white CM. Intercourse: CD 11, CD 13.',
+                  content: 'Cycle Day ${content?.cycleDay.toString()}: ${content?.currentCycleInfo ?? ''}'
+                ),
+                CycleInsightsCard(
+                  svgIcon: SvgPicture.asset(AppIcons.suggestionIcon),
+                  iconColor: Colors.redAccent,
+                  backgroundColor: Color(0xFFEBF1EF),
+                  headerText :'Fertie’s Suggestions for You',
+                  content: '• ${content?.suggestion ?? ''}',
+                ),
+                CycleInsightsCard(
+                  svgIcon: SvgPicture.asset(AppIcons.noticeIcon),
+                  iconColor: Colors.redAccent,
+                  headerText :'Patterns Fertie Noticed',
+                  content: content?.patternFertieNoticed ?? '',
+                ),
+                CycleInsightsCard(
+                  svgIcon: SvgPicture.asset(AppIcons.mindIcon),
+                  iconColor: Colors.redAccent,
+                  headerText :'What to Keep in Mind in This Cycle',
+                  content: content?.whatToKeepInMindInThisCycle ?? '',
+                ),
 
-            ],
-          ),
+              ],
+            );
+          }),
         ),
       ),
     );
