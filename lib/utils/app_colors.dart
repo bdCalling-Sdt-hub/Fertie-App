@@ -19,13 +19,13 @@ class AppColors{
   static Color colorF6F6F6 = const Color(0xFFF6F6F6);
   static Color colorFCF5F4 = const Color(0xFFFCF5F4);
   static Color colorE7E7E7 = const Color(0xFFE7E7E7);
-  static Color colorE0DCD2 = const Color(0xFFE0DCD2);
+  static Color todayColor = const Color(0xFFE0DCD2);
   static Color colorEBD7C7 = const Color(0xFFEBD7C7);
   static Color color88888 = const Color(0xFF888888);
   static Color colorFae6e3 = const Color(0xFFfae6e3);
   static Color color594756 = const Color(0xFF594756);
-  static Color colorA6B1BB = const Color(0xFFA6B1BB);
-  static Color colorB7BBA6 = const Color(0xFFB7BBA6);
+  static Color ovulationColor = const Color(0xFFA6B1BB);
+  static Color fertileDaysColor = const Color(0xFFB7BBA6);
   static Color colorFEFDFB = const Color(0xFFFEFDFB);
   static Color backgroundColor = const Color(0xFFFDFBEF);
   static Color chatBg = const Color(0xFFEBF1EF);
@@ -51,6 +51,7 @@ class AppColors{
   static Color color1E66CA = const Color(0xFF1E66CA);
   static Color hintColor = const Color(0xFFB5B5B5);
   static Color greyColor = const Color(0xFFB5B5B5);
+  static Color greyColor2 = const Color(0xFFD0D0D0);
   static Color color101720 = const Color(0xFF101720);
 
   static Color dividerColor = const Color(0xFF555555);
