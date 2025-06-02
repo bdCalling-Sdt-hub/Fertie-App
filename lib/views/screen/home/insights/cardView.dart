@@ -8,42 +8,44 @@ class CardView extends StatelessWidget {
   final String title;
   final String date;
   final String description;
+  final double? iconSize;
+  final TextStyle? descriptionStyle;
 
   const CardView({
     super.key,
     required this.icon,
     required this.title,
     required this.date,
-    required this.description,
+    required this.description, this.iconSize, this.descriptionStyle,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 230.h,
+      height: 250.h,
       width: 188.w,
       child: Card(
-        elevation: 2,
+        elevation: 10,
+        shadowColor: Colors.black.withValues(alpha: 0.3),
         color: AppColors.colorFEFDFB,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12),
           side: BorderSide(
-            color: AppColors.greyColor,
-            width: .2.w,
+            color: AppColors.greyColor2,
+            width: 0.7.w,
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 12.w),
+          padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 16.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 4.h),
+                padding: EdgeInsets.only(bottom: 4.h, top: 16),
                 child: Image.asset(
                   icon,
-                  width: 40.w,
-                  height: 40.h,
+                  width: iconSize ?? 40.w,
+                  height: iconSize ?? 40.h,
                 ),
               ),
 
@@ -55,14 +57,15 @@ class CardView extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 2.h),
                 child: Text(
                   date,
-                  style: AppStyles.fontSize14(fontWeight: FontWeight.w600,color: AppColors.greyColor),
+                  style: AppStyles.fontSize14(fontWeight: FontWeight.w400,color: AppColors.color777777),
                 ),
               ),
-              Divider(thickness: 1,color: AppColors.greyColor),
+              Divider(thickness: 1,color: AppColors.greyColor2),
               Text(
                 description,
-                style: AppStyles.fontSize12(fontWeight: FontWeight.w600,color: AppColors.greyColor),
+                style: descriptionStyle ?? AppStyles.fontSize12(fontWeight: FontWeight.w500,color: AppColors.color777777),
               ),
+              const SizedBox(height: 4)
             ],
           ),
         ),
