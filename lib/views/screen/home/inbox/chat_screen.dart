@@ -42,10 +42,11 @@ class ChatScreenState extends State<ChatScreen> {
   void initState() {
     super.initState();
     // Use Get.find to get existing controller or create if not exists
-    chatController = Get.isRegistered<ChatController>()
-        ? Get.find<ChatController>()
-        : Get.put(ChatController());
+    // chatController = Get.isRegistered<ChatController>()
+    //     ? Get.find<ChatController>()
+    //     : Get.put(ChatController());
 
+    chatController = Get.put(ChatController(), permanent: true);
     ever(chatController.messages, (_) => _scrollToBottom());
   }
 
