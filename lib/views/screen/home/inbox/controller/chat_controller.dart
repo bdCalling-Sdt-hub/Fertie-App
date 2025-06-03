@@ -49,7 +49,10 @@ class ChatController extends GetxController {
     subscription?.cancel(); // cancel any existing subscription
     subscription = chatService.getChatResponses(userMessage, conversationId).listen((chunk) {
       // append each chunk to the current bot message
-      displayChunkByChunk(chunk);
+      // displayChunkByChunk(chunk);
+
+      currentBotMessage.value += chunk;
+      update();
     },
       onError: (error) {
       isTyping.value = false;
@@ -71,10 +74,10 @@ class ChatController extends GetxController {
     );
   }
 
-  Future<void> displayChunkByChunk(String chunk) async {
-      currentBotMessage.value+=chunk.toString();
-        update();
-  }
+  // Future<void> displayChunkByChunk(String chunk) async {
+  //     currentBotMessage.value+=chunk.toString();
+  //       update();
+  // }
 
   @override
   void onClose() {

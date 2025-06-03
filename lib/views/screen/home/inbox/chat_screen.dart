@@ -68,8 +68,24 @@ class ChatScreenState extends State<ChatScreen> {
                 return ListView.builder(
                   controller: _scrollController,
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-                  itemCount: chatController.messages.length,
+                  // Original code:
+                  // itemCount: chatController.messages.length,
+                  // itemBuilder: (context, index) {
+                  //   return _buildMessage(chatController.messages[index]);
+                  // },
+
+                  // Modified code: Include currentBotMessage for live display
+                  itemCount: chatController.messages.length + (chatController.currentBotMessage.value.isNotEmpty ? 1 : 0),
                   itemBuilder: (context, index) {
+                    // Add in-progress message at the end
+                    if (index == chatController.messages.length && chatController.currentBotMessage.value.isNotEmpty) {
+                      return _buildMessage(ChatMessage(
+                        text: chatController.currentBotMessage.value.trim(),
+                        isMe: false,
+                        time: DateTime.now(),
+                      ));
+                    }
+                    // Show completed messages
                     return _buildMessage(chatController.messages[index]);
                   },
                 );
