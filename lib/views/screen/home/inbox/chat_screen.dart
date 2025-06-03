@@ -47,7 +47,7 @@ class ChatScreenState extends State<ChatScreen> {
     //     : Get.put(ChatController());
 
     chatController = Get.put(ChatController(), permanent: true);
-    ever(chatController.messages, (_) => _scrollToBottom());
+    ever(chatController.currentBotMessage, (_) => _scrollToBottom());
   }
 
   @override

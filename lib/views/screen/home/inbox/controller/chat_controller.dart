@@ -48,9 +48,8 @@ class ChatController extends GetxController {
   void fetchBotResponse(String userMessage, String conversationId) {
     subscription?.cancel(); // cancel any existing subscription
     subscription = chatService.getChatResponses(userMessage, conversationId).listen((chunk) {
-      // append each chunk to the current bot message
-      // displayChunkByChunk(chunk);
 
+      // append each chunk to the current bot message
       currentBotMessage.value += chunk;
       update();
     },
