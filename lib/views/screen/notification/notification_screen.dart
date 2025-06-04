@@ -19,7 +19,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
     {
       'title': 'Set your cycle Insights for today',
       'date': 'January 14, 2025',
-      'description': 'Remainder',
+      'description': 'Reminder',
       'notificationType': 'Reminder',
     },
     {
@@ -66,27 +66,28 @@ class _NotificationScreenState extends State<NotificationScreen> {
     },
   ];
 
-  Color getNotificationBackgroundColor(String notificationType) {
-    switch (notificationType) {
-      case 'Reminder':
-        return Color(0xFFFAEBE0);
-      case 'Ovulation':
-        return Color(0xFFFFFFFF);
-      case 'Pregnancy':
-        return Color(0xFFE6EEF3);
-      case 'Period':
-        return Color(0xFFFAEBE0);
-      default:
-        return Colors.white;
-    }
-  }
+  // Color getNotificationBackgroundColor(String notificationType) {
+  //   switch (notificationType) {
+  //     case 'Reminder':
+  //       return Color(0xFFFAEBE0);
+  //     case 'Ovulation':
+  //       return Color(0xFFFFFFFF);
+  //     case 'Pregnancy':
+  //       return Color(0xFFE6EEF3);
+  //     case 'Period':
+  //       return Color(0xFFFAEBE0);
+  //     default:
+  //       return Colors.white;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      // backgroundColor: AppColors.white,
       bottomNavigationBar: UserBottomMenu(3),
       appBar: AppBar(
+        backgroundColor: AppColors.backgroundColor,
         title:  Text('Notification',style: AppStyles.fontSize24(fontWeight: FontWeight.w600)),
         centerTitle: true,
         automaticallyImplyLeading: false,
@@ -95,54 +96,75 @@ class _NotificationScreenState extends State<NotificationScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextButton(
-              onPressed: () {
-              },
-              child: CustomText(
-                text: "Make all read",
-                color: Colors.blue,
-                fontWeight: FontWeight.w600,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              child: TextButton(
+                onPressed: () {
+                },
+                child: CustomText(
+                  text: "Mark all read",
+                  color: Colors.blue,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
-            SizedBox(height: 8.h),
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: notifications.length,
               itemBuilder: (context, index) {
                 final notification = notifications[index];
-                Color backgroundColor = getNotificationBackgroundColor(notification['notificationType']!);
+                // Color backgroundColor = getNotificationBackgroundColor(notification['notificationType']!);
 
                 return Container(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
-                    color: backgroundColor,
+                    color: AppColors.backgroundColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.15),
+                        blurRadius: 16,
+                        offset: Offset(0, 4),
+                      ),
+                    ],
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        notification['title']!,
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.blackColor,
-                        ),
-                      ),
-                      SizedBox(height: 8.h),
-                      Text(
-                        notification['date']!,
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          color: AppColors.greyColor,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              notification['title']!,
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.blackColor,
+                              ),
+                              softWrap: true,
+                            ),
+                          ),
+                          SizedBox(width: 8.h),
+                          Text(
+                            notification['date']!,
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: AppColors.subTextColor,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
                       ),
                       SizedBox(height: 8.h),
                       Text(
                         notification['description']!,
                         style: TextStyle(
                           fontSize: 14.sp,
-                          color: AppColors.primaryColor,
+                          color: AppColors.subTextColor,
+                          fontWeight: FontWeight.w500,
+                          // color: AppColors.primaryColor,
                         ),
                       ),
                     ],
