@@ -8,13 +8,15 @@ class CustomListTile extends StatelessWidget {
   final Widget? suffixIcon;
   final Color? borderColor;
   final VoidCallback? onTap;
+  final TextStyle? textStyle;
+
   const CustomListTile({
     super.key,
     required this.title,
     this.onTap,
     this.prefixIcon,
     this.suffixIcon,
-    this.borderColor,
+    this.borderColor, this.textStyle,
   });
 
   @override
@@ -27,6 +29,7 @@ class CustomListTile extends StatelessWidget {
         horizontalTitleGap: 12.w,
         dense: true,
         title: CustomText(
+          textStyle: textStyle,
           textAlign: TextAlign.left,
           text: title,
           maxLine: 2,

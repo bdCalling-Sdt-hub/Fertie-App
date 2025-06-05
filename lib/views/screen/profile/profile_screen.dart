@@ -25,20 +25,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.secondColor,
+      // backgroundColor: AppColors.secondColor,
       bottomNavigationBar: UserBottomMenu(2),
       appBar: AppBar(
-        backgroundColor: AppColors.secondColor,
+        backgroundColor: AppColors.backgroundColor,
         title: Text(
           'Profile',
-          style: AppStyles.fontSize24(fontWeight: FontWeight.w600),
+          style: AppStyles.fontSize20(fontWeight: FontWeight.w700).copyWith(fontFamily: 'Nunito'),
         ),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(8.r),
+          padding: EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
               Center(
@@ -48,8 +48,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     // Profile picture
                     _image != null
                         ? Container(
-                      width: 150.w,
-                      height: 150.h,
+                      width: 45.w,
+                      height: 45.h,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(width: 1.w, color: AppColors.white),
@@ -104,28 +104,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ],
                 ),
               ),
+              SizedBox(height: 16),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Mahafujer',
-                    style: AppStyles.fontSize20(fontWeight: FontWeight.w900),
+                    'Lindsay',
+                    style: AppStyles.fontSize24(fontWeight: FontWeight.w900).copyWith(fontFamily: 'Nunito'),
                   ),
+                  SizedBox(height: 8),
                   Text(
                     'Age : 25',
                     style: AppStyles.fontSize16(color: AppColors.subTextColor),
                   ),
+                  SizedBox(height: 8),
                   Text(
                     'Account type : Free',
                     style: AppStyles.fontSize16(color: AppColors.subTextColor),
                   ),
                 ],
               ),
-              SizedBox(height: 8.h),
+              SizedBox(height: 20.h),
               Container(
                 decoration: BoxDecoration(
-                  color: AppColors.colorF7D6D1,
+                  // color: AppColors.colorF7D6D1,
                   borderRadius: BorderRadius.all(Radius.circular(16.r)),
                 ),
                 width: double.infinity,
@@ -153,9 +156,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         prefixIcon: SvgPicture.asset(AppIcons.updateAccountIcon),
                         suffixIcon: SvgPicture.asset(AppIcons.listTileArrowIcon),
                         onTap: () {
+                          // todo: if the user is subscribed, navigate to page congratulating him
                           Get.toNamed(AppRoutes.upgradeAccountScreen);
                         },
                         title: 'Upgrade Account Type',
+                        textStyle: TextStyle(
+                          color: AppColors.primaryColor2,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600
+                        ),
                       ),
                       CustomListTile(
                         prefixIcon: SvgPicture.asset(AppIcons.loveIcon),
