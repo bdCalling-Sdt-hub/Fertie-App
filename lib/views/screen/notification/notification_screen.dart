@@ -17,37 +17,37 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   final notifications = [
     {
-      'title': 'Set your cycle Insights for today',
+      'title': 'Hey! Don’t forget to check your cycle insights today!',
       'date': 'January 14, 2025',
       'description': 'Reminder',
       'notificationType': 'Reminder',
     },
     {
-      'title': 'Today is 2nd of your ovulation time',
+      'title': 'Hey! It’s the second day of your ovulation window!',
       'date': 'January 15, 2025',
       'description': '(Very High Chance for Pregnancy)',
       'notificationType': 'Ovulation',
     },
     {
-      'title': 'Set your cycle Insights for today',
+      'title': 'Hey! Today might just be the day for ovulation!',
       'date': 'January 14, 2025',
       'description': 'Remainder',
       'notificationType': 'Reminder',
     },
     {
-      'title': 'Ovulation Day start from today',
+      'title': 'Hey! Today’s a great day for making a baby!',
       'date': 'January 14, 2025',
       'description': '(Very High Chance for Pregnancy)',
       'notificationType': 'Ovulation',
     },
     {
-      'title': '⚡Vert High Chance for Pregnancy',
+      'title': 'Hey! Looks like your period is showing up today!',
       'date': 'January 14, 2025',
       'description': 'Ovulation Day',
       'notificationType': 'Pregnancy',
     },
     {
-      'title': 'Today is 2nd of your ovulation time',
+      'title': 'Hey! Your period is kicking off today!',
       'date': 'January 15, 2025',
       'description': '(Very High Chance for Pregnancy)',
       'notificationType': 'Ovulation',

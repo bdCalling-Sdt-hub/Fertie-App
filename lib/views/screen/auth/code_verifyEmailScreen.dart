@@ -94,7 +94,7 @@ class _CodeVerifyEmailScreenState extends State<CodeVerifyEmailScreen> {
                 onTap: () {
                   Get.toNamed(AppRoutes.resetPasswordScreen);
                 },
-                text: 'Sent OTP',
+                text: 'Verify OTP',
               ),
 
               SizedBox(height: 10.h),

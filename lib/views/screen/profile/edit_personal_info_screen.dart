@@ -32,7 +32,7 @@ class _EditPersonalInformationScreenState
   @override
   void initState() {
     super.initState();
-    nameCTRl.text = 'Mahafujer';
+    nameCTRl.text = 'Lindsay';
     emailCTRl.text = 'linfsay@example.com';
     birthdayCTRl.text = 'April 15,2022';
   }
@@ -58,9 +58,8 @@ class _EditPersonalInformationScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.secondColor,
       appBar: AppBar(
-        backgroundColor: AppColors.secondColor,
+        backgroundColor: AppColors.backgroundColor,
         centerTitle: true,
         title: Text('Edit Personal Information'),
       ),

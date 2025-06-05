@@ -1,6 +1,5 @@
 import 'package:fertie_application/helpers/route.dart';
 import 'package:fertie_application/utils/app_colors.dart';
-import 'package:fertie_application/utils/app_icons.dart';
 import 'package:fertie_application/utils/app_strings.dart';
 import 'package:fertie_application/utils/style.dart';
 import 'package:fertie_application/views/base/custom_button.dart';
@@ -8,7 +7,6 @@ import 'package:fertie_application/views/base/custom_text.dart';
 import 'package:fertie_application/views/base/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 
@@ -28,6 +26,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
+        backgroundColor: AppColors.white,
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -93,19 +92,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ],
                 ),
               ),*/
+              SizedBox(height: 10),
               /// Sing In Button
               CustomButton(
                 onTap: () {
-                  Get.toNamed(AppRoutes.homeScreen);
+                  Get.toNamed(AppRoutes.setPasswordScreen);
                 },
-                text:'Sign In',
+                text:'Next',
               ),
               ///==================>> Don't have and Account <===================
               SizedBox(height: 10.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("${AppStrings.alreadyHaveAccount.tr}"),
+                  Text(AppStrings.alreadyHaveAccount.tr),
                   TextButton(
                       onPressed: () {
                         Get.toNamed(AppRoutes.signInScreen);

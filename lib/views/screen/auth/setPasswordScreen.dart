@@ -45,7 +45,7 @@ class _SetPasswordScreenState extends State<SetPasswordScreen> {
               SizedBox(height: 40.h),
               Padding(
                 padding:  EdgeInsets.symmetric(vertical: 8.r),
-                child: Text('New Password',style: AppStyles.fontSize16(fontWeight: FontWeight.w600)),
+                child: Text('Password',style: AppStyles.fontSize16(fontWeight: FontWeight.w600)),
               ),
               CustomTextField(
                   filColor: AppColors.white,
@@ -57,7 +57,7 @@ class _SetPasswordScreenState extends State<SetPasswordScreen> {
               ),
               CustomTextField(
                   filColor: AppColors.white,
-                  hintText: 'Enter password',
+                  hintText: 'Confirm password',
                   controller: passCtrl),
 
 
