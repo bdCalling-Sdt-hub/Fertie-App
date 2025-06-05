@@ -81,7 +81,7 @@ class HomeScreenState extends State<HomeScreen> {
                   // Calendar
                   buildCalendarWidget(),
 
-                  SizedBox(height: 12),
+                  SizedBox(height: 14),
                   
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.h),
@@ -89,10 +89,11 @@ class HomeScreenState extends State<HomeScreen> {
                       children: [
                         Expanded(
                           child: CardView(
-                            icon: 'assets/images/waterImage.png',
+                            icon: 'assets/images/water.png',
                             title: 'Ovulation',
                             date: 'May 14, 2025',
                             description: 'In 6 days (CD14)',
+                            descriptionTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: const Color(0xFF777777)),
                           ),
                         ),
                         SizedBox(width: 8.w),
@@ -101,7 +102,7 @@ class HomeScreenState extends State<HomeScreen> {
                             icon: 'assets/images/love.png',
                             title: 'Fertile Window',
                             date: 'May 14, 2025',
-                            description: 'Best chance for pregnancy if trying to conceive this weekBest chance for pregnancy if trying to conceive this week',
+                            description: 'Best chance for pregnancy if trying to conceive this week',
                           ),
                         ),
                       ],
@@ -129,6 +130,7 @@ class HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
+                  SizedBox(height: 24),
                 ],
               ),
             ),
