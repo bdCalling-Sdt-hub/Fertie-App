@@ -1,3 +1,4 @@
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart' show ButtonMode, Category, CategoryIcons, Config, EmojiPicker;
 import 'package:fertie_application/utils/app_colors.dart';
 import 'package:fertie_application/utils/app_icons.dart';
 import 'package:fertie_application/utils/style.dart';
@@ -28,6 +29,21 @@ class ChatScreenState extends State<ChatScreen> {
   late final ChatController chatController;
   final ScrollController _scrollController = ScrollController();
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  // ADDED: Track which month is currently selected
+  String selectedMonthId = '2025-06'; // Default to current month
+
+  // MODIFIED: Updated monthly chats with better structure
+  List<MonthlyChatItem> monthlyChats = [
+    MonthlyChatItem(id: '2025-06', monthName: 'June 2025', isCurrentMonth: true, lastActivity: DateTime(2025, 6, 12)),
+    MonthlyChatItem(id: '2025-05', monthName: 'May 2025', isCurrentMonth: false, lastActivity: DateTime(2025, 5, 28)),
+    MonthlyChatItem(id: '2025-04', monthName: 'April 2025', isCurrentMonth: false, lastActivity: DateTime(2025, 4, 25)),
+    MonthlyChatItem(id: '2025-03', monthName: 'March 2025', isCurrentMonth: false, lastActivity: DateTime(2025, 3, 15)),
+    MonthlyChatItem(id: '2025-02', monthName: 'February 2025', isCurrentMonth: false, lastActivity: DateTime(2025, 2, 20)),
+    MonthlyChatItem(id: '2025-01', monthName: 'January 2025', isCurrentMonth: false, lastActivity: DateTime(2025, 1, 18)),
+  ];
+
   void _scrollToBottom() {
     if (_scrollController.hasClients) {
       _scrollController.animateTo(
@@ -41,11 +57,6 @@ class ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
-    // Use Get.find to get existing controller or create if not exists
-    // chatController = Get.isRegistered<ChatController>()
-    //     ? Get.find<ChatController>()
-    //     : Get.put(ChatController());
-
     chatController = Get.put(ChatController(), permanent: true);
     ever(chatController.currentBotMessage, (_) => _scrollToBottom());
     ever(chatController.messages, (_) => _scrollToBottom());
@@ -54,31 +65,21 @@ class ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: AppColors.chatBg,
-      // appBar: widget.isFullScreen ? AppBar(
-      //   // title: Text('Chat with Fertie - Cycle Day 10'),
-      //   // backgroundColor: AppColors.color7D9EBB,
-      // ) : null,
+      // MODIFIED: Updated drawer design to match screenshot
+      drawer: _buildChatHistoryDrawer(),
       body: SafeArea(
         child: Column(
           children: [
-            // if (!widget.isFullScreen)
-              buildTopBarContainer(),
+            buildTopBarContainer(),
             Expanded(
               child: Obx(() {
                 return ListView.builder(
                   controller: _scrollController,
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-                  // Original code:
-                  // itemCount: chatController.messages.length,
-                  // itemBuilder: (context, index) {
-                  //   return _buildMessage(chatController.messages[index]);
-                  // },
-
-                  // Modified code: Include currentBotMessage for live display
                   itemCount: chatController.messages.length + (chatController.currentBotMessage.value.isNotEmpty ? 1 : 0),
                   itemBuilder: (context, index) {
-                    // Add in-progress message at the end
                     if (index == chatController.messages.length && chatController.currentBotMessage.value.isNotEmpty) {
                       return _buildMessage(ChatMessage(
                         text: chatController.currentBotMessage.value.trim(),
@@ -86,7 +87,6 @@ class ChatScreenState extends State<ChatScreen> {
                         time: DateTime.now(),
                       ));
                     }
-                    // Show completed messages
                     return _buildMessage(chatController.messages[index]);
                   },
                 );
@@ -107,6 +107,215 @@ class ChatScreenState extends State<ChatScreen> {
         ),
       ),
     );
+  }
+
+  // MODIFIED: Updated drawer design to match the screenshot with proper selection
+  Widget _buildChatHistoryDrawer() {
+    return Drawer(
+      backgroundColor: AppColors.brandSecondaryColor,
+      width: MediaQuery.of(context).size.width * 0.65,
+      child: SafeArea(
+        child: Column(
+          children: [
+            // MODIFIED: Updated header design to match screenshot
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color:  AppColors.brandSecondaryColor,
+                border: Border(bottom: BorderSide(color: Colors.grey[200]!)),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.chat_bubble_outline, color: Colors.white, size: 24),
+                  const SizedBox(width: 12),
+                  Text(
+                    'Chat History',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // MODIFIED: Updated list design to match screenshot
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                itemCount: monthlyChats.length,
+                itemBuilder: (context, index) {
+                  MonthlyChatItem monthChat = monthlyChats[index];
+                  return _buildMonthlyChatItem(monthChat);
+                },
+              ),
+            ),
+
+            // KEPT: Bottom Fertie AI Assistant section
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                border: Border(top: BorderSide(color: Colors.grey[200]!)),
+              ),
+              child: Row(
+                children: [
+                  Image.asset(AppImages.cuteAppLogo, height: 24, width: 24),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Fertie AI Assistant',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // MODIFIED: Updated design to match the screenshot with proper selection handling
+  Widget _buildMonthlyChatItem(MonthlyChatItem monthChat) {
+    // ADDED: Check if this month is selected (not just current month)
+    bool isSelected = selectedMonthId == monthChat.id;
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      padding: EdgeInsets.all(0),
+      decoration: BoxDecoration(
+        // MODIFIED: Updated selection styling to match screenshot
+        color: isSelected ? Color(0xFFE3F2FD).withValues(alpha: 0.2) : Colors.transparent,
+        borderRadius: BorderRadius.circular(20),
+        // border: isSelected ? Border.all(color: Color(0xFF2196F3), width: 1.5) : null,
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          onTap: () {
+            // ADDED: Handle monthly chat selection with proper state management
+            setState(() {
+              selectedMonthId = monthChat.id;
+            });
+
+            // ADDED: Send selected month to server for fetching chat history
+            _loadMonthlyChat(monthChat.id);
+
+            // Close drawer after selection
+            Navigator.pop(context);
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                // MODIFIED: Updated icon container design
+                // Container(
+                //   padding: const EdgeInsets.all(12),
+                //   decoration: BoxDecoration(
+                //     color: isSelected ? Color(0xFF2196F3) : Color(0xFFF5F5F5),
+                //     borderRadius: BorderRadius.circular(12),
+                //   ),
+                //   child: Icon(
+                //     Icons.calendar_month_rounded,
+                //     color: isSelected ? Colors.white : Colors.grey[600],
+                //     size: 20,
+                //   ),
+                // ),
+                const SizedBox(width: 16),
+
+                // MODIFIED: Updated text styling to match screenshot
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        monthChat.monthName,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
+                          // color: isSelected ? Color(0xFF1976D2) : Colors.black87,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      // Text(
+                      //   monthChat.isCurrentMonth
+                      //       ? 'Current month • Active'
+                      //       : 'Last activity: ${_formatDate(monthChat.lastActivity)}',
+                      //   style: TextStyle(
+                      //     fontSize: 13,
+                      //     color: isSelected ? Color(0xFF1976D2).withOpacity(0.8) : Colors.grey[600],
+                      //   ),
+                      // ),
+                    ],
+                  ),
+                ),
+
+                // MODIFIED: Updated trailing icon/badge
+                if (monthChat.isCurrentMonth)
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF4CAF50),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      'CURRENT',
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                // else
+                //   Icon(
+                //     Icons.chevron_right_rounded,
+                //     color: Colors.grey[400],
+                //     size: 20,
+                //   ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ADDED: Method to load monthly chat data from server
+  void _loadMonthlyChat(String monthId) {
+    print('Loading chat history for month: $monthId');
+
+    // TODO: Implement API call to fetch monthly chat history
+    // Example implementation:
+    // chatController.loadMonthlyChat(monthId);
+
+    // You can add loading state here
+    // chatController.isLoading.value = true;
+
+    // API call example:
+    // try {
+    //   final response = await ApiService.getMonthlyChat(monthId);
+    //   chatController.messages.value = response.messages;
+    //   chatController.isLoading.value = false;
+    // } catch (e) {
+    //   print('Error loading monthly chat: $e');
+    //   chatController.isLoading.value = false;
+    // }
+  }
+
+  // KEPT: Helper method to format date
+  String _formatDate(DateTime date) {
+    List<String> months = [
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ];
+    return '${months[date.month - 1]} ${date.day}';
   }
 
   Widget _buildMessage(ChatMessage message) {
@@ -163,9 +372,9 @@ class ChatScreenState extends State<ChatScreen> {
     return Container(
       height: 40,
       decoration: BoxDecoration(
-        color: AppColors.chatTopBarColor,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
-        border: Border.all(color: AppColors.chatTopBarBorderColor)
+          color: AppColors.chatTopBarColor,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
+          border: Border.all(color: AppColors.chatTopBarBorderColor)
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Row(
@@ -173,7 +382,7 @@ class ChatScreenState extends State<ChatScreen> {
         children: [
           GestureDetector(
             onTap: () {
-              print('Sidebar icon clicked');
+              _scaffoldKey.currentState?.openDrawer();
             },
             child: SvgPicture.asset(AppIcons.sideBarIcon, color: Colors.black),
           ),
@@ -182,8 +391,6 @@ class ChatScreenState extends State<ChatScreen> {
             style: AppStyles.fontSize16(
                 color: AppColors.blackColor, fontWeight: FontWeight.bold).copyWith(fontFamily: 'Nunito'),
           ),
-
-          // Expand/Collapse button
           GestureDetector(
             onTap: !widget.isFullScreen ? widget.onExpandTap : Get.back,
             child: SvgPicture.asset(
@@ -221,7 +428,32 @@ class ChatScreenState extends State<ChatScreen> {
               ),
             ),
           ),
-          Icon(Icons.emoji_emotions_outlined, color: Colors.grey[600]),
+          IconButton(
+            color: Colors.grey[600],
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                backgroundColor: Colors.transparent,
+                builder: (context) => Container(
+                  height: 250,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                  ),
+                  child: EmojiPicker(
+                    onEmojiSelected: (category, emoji) {
+                      chatController.chatTextFieldController.text += emoji.emoji;
+                    },
+                    config: Config(
+                      height: 256,
+                    ),
+                  ),
+                ),
+              );
+            },
+            icon: Icon(Icons.emoji_emotions_outlined),
+          ),
+          const SizedBox(width: 8),
           const SizedBox(width: 8),
           IconButton(
             icon: const Icon(Icons.send_rounded, color: Colors.grey),
@@ -233,4 +465,19 @@ class ChatScreenState extends State<ChatScreen> {
       ),
     );
   }
+}
+
+// KEPT: Model class for monthly chat items
+class MonthlyChatItem {
+  final String id;
+  final String monthName;
+  final bool isCurrentMonth;
+  final DateTime lastActivity;
+
+  MonthlyChatItem({
+    required this.id,
+    required this.monthName,
+    required this.isCurrentMonth,
+    required this.lastActivity,
+  });
 }
