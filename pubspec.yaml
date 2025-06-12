@@ -58,6 +58,7 @@ dependencies:
   google_fonts: ^6.2.1
   logger: ^2.5.0
   http: ^1.2.2
+  emoji_picker_flutter: ^4.3.0
 
 dev_dependencies:
   flutter_test:

@@ -14,6 +14,8 @@ class AppColors{
   static Color colorDFC7FF = const Color(0xFFDFC7FF);
   static Color colorFF5653 = const Color(0xFFFF5653);
   static Color chatTopBarBorderColor = const Color(0xFF7D9EBB);
+  static Color brandSecondaryColor = const Color(0xFF7D9EBB);
+  static Color drawerBgColor = const Color(0xFF93B2C7);
   static Color chatTopBarColor = const Color(0xFFB6CCDA);
   static Color colorD1D1D1 = const Color(0xFFD1D1D1);
   static Color colorF6F6F6 = const Color(0xFFF6F6F6);
