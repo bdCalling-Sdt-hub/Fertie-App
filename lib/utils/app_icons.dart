@@ -8,8 +8,8 @@ class AppIcons{
   static String profileIcon = "$baseUrl/profile_icon.svg";
   static String homeFillUpIcon = "$baseUrl/homeFillUpIcon.svg";
   static String homeIcon = "$baseUrl/homeIcon.svg";
-  static String notificationFillup = "$baseUrl/notification_fillup.svg";
-  static String notificationIcon = "$baseUrl/notification_icon.svg";
+  static String notificationFillup = "$baseUrl/notification-03-filled.svg";
+  static String notificationIcon = "$baseUrl/notification-03.svg";
   static String calenderfillup = "$baseUrl/calenderfillup.svg";
   static String calenderIcon = "$baseUrl/cycle_insights.svg";
   static String googleIcon = "$baseUrl/googleIcon.svg";
