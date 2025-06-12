@@ -10,7 +10,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:intl/intl.dart';
 
 class EditPersonalInformationScreen extends StatefulWidget {
   const EditPersonalInformationScreen({super.key});
@@ -27,13 +26,15 @@ class _EditPersonalInformationScreenState
   TextEditingController emailCTRl = TextEditingController();
   Uint8List? _image;
   File? selectedImage;
+  int age = 0;
+
 
 
   @override
   void initState() {
     super.initState();
     nameCTRl.text = 'Lindsay';
-    emailCTRl.text = 'linfsay@example.com';
+    emailCTRl.text = 'lindsay@example.com';
     birthdayCTRl.text = 'April 15,2022';
   }
   // Default selected date
@@ -51,6 +52,7 @@ class _EditPersonalInformationScreenState
       setState(() {
         selectedDate = picked;
         birthdayCTRl.text = "${selectedDate.toLocal()}".split(' ')[0];
+        age = DateTime.now().year - selectedDate.year;
       });
     }
   }
@@ -65,7 +67,7 @@ class _EditPersonalInformationScreenState
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(24.0),
           child: Container(
             width: double.infinity,
             decoration: BoxDecoration(
@@ -180,7 +182,7 @@ class _EditPersonalInformationScreenState
                       ),
                       SizedBox(width: 10.w),
                       Text(
-                        '${DateTime.now().year - selectedDate.year} Years',
+                        '$age Years',
                         style: AppStyles.fontSize24(fontWeight: FontWeight.w500, color: AppColors.subTextColor),
                       ),
                     ],
