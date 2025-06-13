@@ -3,6 +3,7 @@ import 'package:fertie_application/utils/app_icons.dart';
 import 'package:fertie_application/utils/style.dart';
 import 'package:fertie_application/views/screen/home/inbox/controller/chat_controller.dart';
 import 'package:fertie_application/views/screen/home/inbox/models/chat_message_model.dart';
+import 'package:fertie_application/views/screen/home/inbox/widgets/fertie_mark.dart';
 import 'package:fertie_application/views/screen/home/inbox/widgets/text_input_container.dart';
 import 'package:fertie_application/views/screen/home/inbox/widgets/typing_dot_animation.dart';
 import 'package:flutter/material.dart';
@@ -152,28 +153,7 @@ class ChatScreenState extends State<ChatScreen> {
                 },
               ),
             ),
-
-            // KEPT: Bottom Fertie AI Assistant section
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                border: Border(top: BorderSide(color: Colors.grey[200]!)),
-              ),
-              child: Row(
-                children: [
-                  Image.asset(AppImages.cuteAppLogo, height: 24, width: 24),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Fertie AI Assistant',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            FertieAiAssistantMark(),
           ],
         ),
       ),
