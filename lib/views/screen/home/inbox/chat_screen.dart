@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../../utils/app_images.dart';
+import 'models/monthly_chat_item_model.dart';
 
 class ChatScreen extends StatefulWidget {
   final bool isFullScreen;
@@ -113,7 +114,7 @@ class ChatScreenState extends State<ChatScreen> {
   Widget _buildChatHistoryDrawer() {
     return Drawer(
       backgroundColor: AppColors.brandSecondaryColor,
-      width: MediaQuery.of(context).size.width * 0.65,
+      width: MediaQuery.of(context).size.width * 0.55,
       child: SafeArea(
         child: Column(
           children: [
@@ -213,21 +214,6 @@ class ChatScreenState extends State<ChatScreen> {
             padding: const EdgeInsets.all(16),
             child: Row(
               children: [
-                // MODIFIED: Updated icon container design
-                // Container(
-                //   padding: const EdgeInsets.all(12),
-                //   decoration: BoxDecoration(
-                //     color: isSelected ? Color(0xFF2196F3) : Color(0xFFF5F5F5),
-                //     borderRadius: BorderRadius.circular(12),
-                //   ),
-                //   child: Icon(
-                //     Icons.calendar_month_rounded,
-                //     color: isSelected ? Colors.white : Colors.grey[600],
-                //     size: 20,
-                //   ),
-                // ),
-                const SizedBox(width: 16),
-
                 // MODIFIED: Updated text styling to match screenshot
                 Expanded(
                   child: Column(
@@ -243,15 +229,6 @@ class ChatScreenState extends State<ChatScreen> {
                         ),
                       ),
                       const SizedBox(height: 4),
-                      // Text(
-                      //   monthChat.isCurrentMonth
-                      //       ? 'Current month • Active'
-                      //       : 'Last activity: ${_formatDate(monthChat.lastActivity)}',
-                      //   style: TextStyle(
-                      //     fontSize: 13,
-                      //     color: isSelected ? Color(0xFF1976D2).withOpacity(0.8) : Colors.grey[600],
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),
@@ -273,12 +250,6 @@ class ChatScreenState extends State<ChatScreen> {
                       ),
                     ),
                   ),
-                // else
-                //   Icon(
-                //     Icons.chevron_right_rounded,
-                //     color: Colors.grey[400],
-                //     size: 20,
-                //   ),
               ],
             ),
           ),
@@ -402,19 +373,4 @@ class ChatScreenState extends State<ChatScreen> {
       ),
     );
   }
-}
-
-// KEPT: Model class for monthly chat items
-class MonthlyChatItem {
-  final String id;
-  final String monthName;
-  final bool isCurrentMonth;
-  final DateTime lastActivity;
-
-  MonthlyChatItem({
-    required this.id,
-    required this.monthName,
-    required this.isCurrentMonth,
-    required this.lastActivity,
-  });
 }

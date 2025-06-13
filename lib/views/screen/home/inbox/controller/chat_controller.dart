@@ -1,6 +1,4 @@
 import 'dart:async';
-// import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
-
 import 'package:fertie_application/data/api_constants.dart';
 import 'package:fertie_application/views/screen/home/inbox/controller/chat_service.dart';
 import 'package:fertie_application/views/screen/home/inbox/models/chat_message_model.dart';
@@ -72,11 +70,6 @@ class ChatController extends GetxController {
       }
     );
   }
-
-  // Future<void> displayChunkByChunk(String chunk) async {
-  //     currentBotMessage.value+=chunk.toString();
-  //       update();
-  // }
 
   @override
   void onClose() {
